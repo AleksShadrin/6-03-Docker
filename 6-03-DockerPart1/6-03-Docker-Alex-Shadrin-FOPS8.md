@@ -9,21 +9,21 @@
 Установите Docker.
 Приложите скриншот.
 
-![]1.png
+![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/1.png)
 Задание 3
 Выполните действия:
 
 Запустите образ hello-world.
 Приложите скриншот.
 
-![]2.png
+![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/2.png)
 Задание 4
 Выполните действия:
 
 Удалите образ hello-world.
 Приложите скриншот.
 
-![]3.png
+![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/3.png)
 Дополнительные задания* (со звёздочкой)
 Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
 
