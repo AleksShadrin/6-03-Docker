@@ -40,6 +40,8 @@
 Создайте свой Docker образ с Apache2 и подмените стандартную страницу index.html на страницу, содержащую ваши ФИО.
 Приложите:
 скриншот содержимого Dockerfile;
-![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/7.png)
-скриншот браузера, где apache2 из вашего контейнера выводит ваши ФИО.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/8.png)
+скриншот браузера, где apache2 из вашего контейнера выводит ваши ФИО.
+
+![](https://github.com/AleksShadrin/netology/blob/main/6-03-DockerPart1/7.png)
