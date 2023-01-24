@@ -1,0 +1,6 @@
+vagrant init debian/bullseye64
+vagrant up
+
+vagrant ssh
+
+sudo passwd
