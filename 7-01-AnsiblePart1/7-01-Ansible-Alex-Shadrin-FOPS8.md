@@ -5,11 +5,16 @@
 Задание 2
 Выполните действия и приложите скриншоты действий.
 Установите Ansible.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/7-01-AnsiblePart1/3.png)
+
 Настройте управляемые виртуальные машины, не меньше двух.
 Создайте файл inventory. Предлагается использовать файл, размещённый в папке с проектом, а не файл inventory по умолчанию.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/7-01-AnsiblePart1/1.png)
+
 Проверьте доступность хостов с помощью модуля ping.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/7-01-AnsiblePart1/2.png)
 
 Задание 3
