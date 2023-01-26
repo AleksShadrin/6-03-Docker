@@ -1,0 +1,7 @@
+---
+
+- name: 1s
+  hosts: all
+  - tasks:
+  - name: 1
+    get_url: https://downloads.apache.org/kafka/3.3.2/kafka-3.3.2-src.tgz
