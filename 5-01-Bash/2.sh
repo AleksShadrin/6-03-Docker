@@ -1,5 +1,5 @@
 #!/bin/bash
-echo Input 2 numbers, with delimiter " "
+echo Input 2 numbers, with delimiter \"\ \"
 read a b
 if [[ $a -gt $b ]];
 then 
