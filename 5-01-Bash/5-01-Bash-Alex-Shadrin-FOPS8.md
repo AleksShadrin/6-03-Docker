@@ -13,18 +13,18 @@
 Если числа равны – умножить их друг на друга (или возвести в квадрат одно из чисел) и вывести результат в консоль.
 Пришлите получившийся код и скриншот, показывающий работу скрипта в качестве ответа.
 
-#!/bin/bash
-echo Input 2 numbers, with delimiter \"\ \"
-read a b
-if [[ $a -gt $b ]];
-then 
-    echo "$a - $b = $(($a-$b))"
-elif [[ $a -lt $b ]]
-then
-    echo "$b - $a = $(($b-$a))"
-else
-    echo "$a * $b = $(($a*$b))"
-fi;
+    #!/bin/bash
+    echo Input 2 numbers, with delimiter \"\ \"
+    read a b
+    if [[ $a -gt $b ]];
+    then 
+        echo "$a - $b = $(($a-$b))"
+    elif [[ $a -lt $b ]]
+    then
+        echo "$b - $a = $(($b-$a))"
+    else
+        echo "$a * $b = $(($a*$b))"
+    fi;
 
 ![](https://github.com/AleksShadrin/netology/blob/main/5-01-Bash/2.png)
 
