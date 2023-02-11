@@ -2,7 +2,16 @@
 Напишите скрипт, который при запуске спрашивает у пользователя путь до директории и создает ее при условии, что ее еще не существует. Если директория существует – пользователю выводится сообщение, что директория существует. Скрипт должен принимать абсолютный путь до директории, например /tmp/testdir или /home/user/testdir
 Пришлите получившийся код и скриншот, показывающий работу скрипта в качестве ответа.
 
-:::code language="shell" source="https://github.com/AleksShadrin/netology/blob/main/5-01-Bash/1.sh":::
+    #!/bin/bash
+    echo "Input path to create"
+    read path
+    if [[ ! -d $path ]];
+    then 
+        mkdir $path
+        echo "Directory has been created: $path"
+    else 
+        echo "Derectory is already exist"
+    fi;
 ![](https://github.com/AleksShadrin/netology/blob/main/5-01-Bash/1.png)
 
 Задание 2.
@@ -39,22 +48,22 @@
 Если формат не подходит под заданные выше – написать «unknown»
 Пришлите получившийся код и скриншот, показывающий работу скрипта в качестве ответа.
 
-#!/bin/bash
-echo Input filename
-read filename
-case "$filename" in
-    *.jpg|*.gif|*.png)
-        echo image
-    ;;
-    *.wav|*.mp3) 
-        echo audio
-    ;;
-    *.txt|*.doc) 
-        echo text
-    ;;
-    *) 
-        echo unknown
-    ;;
-esac
+    #!/bin/bash
+    echo Input filename
+    read filename
+    case "$filename" in
+        *.jpg|*.gif|*.png)
+            echo image
+        ;;
+        *.wav|*.mp3) 
+            echo audio
+        ;;
+        *.txt|*.doc) 
+            echo text
+        ;;
+        *) 
+            echo unknown
+        ;;
+    esac
 
 ![](https://github.com/AleksShadrin/netology/blob/main/5-01-Bash/3.png)
