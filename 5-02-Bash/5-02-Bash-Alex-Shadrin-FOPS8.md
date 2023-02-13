@@ -36,6 +36,27 @@
 Подсказка - Примерный алгоритм решения
 Пришлите получившийся код функции и скриншот, показывающий работу функции в качестве ответа.
 
+    #!/bin/bash
+    path=$1
+    i=0
+    a=0
+    if [[ -d $path ]];
+    then
+        for file in $path*
+        do
+            if  [[ ! -d $file ]]&&[[ ! -h $file ]];
+            then
+                ((a=$a+$(stat --format='%s' $file)))
+                ((i++))
+            fi;
+        done
+    else
+        echo directory doesn\'t exist
+    fi;
+    echo "average size of files in $path : $(($a/$i))"
+
+![](https://github.com/AleksShadrin/netology/blob/main/5-02-Bash/3.png)
+
 Дополнительные задания (со звездочкой*)
 Эти задания дополнительные (не обязательные к выполнению) и никак не повлияют на получение вами зачета по этому домашнему заданию. Вы можете их выполнить, если хотите глубже и/или шире разобраться в материале.
 
@@ -43,9 +64,37 @@
 Напишите свой калькулятор.
 
 В нем реализуйте простейшие арифметические операции: «+»; «-»; «*»; «/».
-
 Считывание параметров реализуйте с помощью read и select.
-
 Примечание: постарайтесь максимально защититься от ошибок, т.к. пользователи любят написать строку вместо числа.
-
 Пришлите получившийся скрипт в качестве ответа.
+
+    #!/bin/bash
+    while true; 
+    do
+        read a	
+        read b
+        if [[  $a =~ ^[1-9][0-9]*$ ]] && [[  $b =~ ^[1-9][0-9]*$ ]]
+        then 
+            break
+        else 
+            echo  wrong input 
+        fi;
+    done
+    select operation in \+ \- \* \/; do
+        case $operation in
+        \+)
+            echo $(($a+$b));
+        break;;
+        \-)
+            echo $(($a-$b));
+        break;;
+        \*)
+            echo $(($a*$b));
+        break;;
+        \/)
+            echo $(($a/$b));
+        break;;
+        esac
+    done
+
+![](https://github.com/AleksShadrin/netology/blob/main/5-02-Bash/4.png)
