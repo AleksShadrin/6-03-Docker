@@ -1,8 +1,8 @@
 #!/bin/bash
-for ((i=0; i<100; i++))
+for ((i=1; i<100; i++))
 do
-    if [[ $i % 3 ]] 
+    if [[ $i%3 -eq 0 ]] 
     then
-        ehco $is
+        echo $i
     fi;
 done
