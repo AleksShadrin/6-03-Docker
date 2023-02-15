@@ -1,22 +1,12 @@
 #!/bin/bash
-
 logfile=$1
-
-#timestamp loadavg1 loadavg5 loadavg15 memfree memtotal diskfree disktotal
+echo "timestamp loadavg1 loadavg5 loadavg15 memfree memtotal diskfree disktotal" >> $logfile
 while true;
-do    
-    loadavg1 = cat /proc/loadavg | awk '{print $1}'
-    loadavg5
-    loadavg15
-    cat /proc/loadavg | echo >> logfile 
-    free | echo >> logfile
-    
-    echo date loadavg1 loadavg5 loadavg15 memfree memtotal diskfree disktotal >> $logfile
+do
+    timestamp=$(date | awk '{print $4}')
+    loadavg=$(cat /proc/loadavg | awk '{print $1, $2, $3}')
+    mem=$(free | grep Mem | awk '{print $4, $2}')
+    disk=$(df -h | awk '/\/$/{print $4, $2}')
+    echo $timestamp $loadavg $mem $disk>> $logfile
     sleep 5
 done
-#loadavg[1,5,15] средний показатель загрузки ЦПУ за последние 1 5 и 15 минут. Примечание: хранится в /proc/loadavg.
-#memfree количество свободной оперативной памяти в байтах. Примечание: используем утилиту free.
-#memtotal количество всей оперативной памяти в байтах. Примечание: используем утилиту free.
-#diskfree свободное место на диске подключенного к /. Примечание: используем утилиту df.
-#disktotal общий объем диска подключенного к /. Примечание: используем утилиту df.
-#Формат записи: timestamp loadavg1 loadavg5 loadavg15 memfree memtotal diskfree disktotal
