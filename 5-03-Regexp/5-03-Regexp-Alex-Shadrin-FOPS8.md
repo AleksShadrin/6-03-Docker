@@ -145,6 +145,7 @@ http {
 ![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.1.png)
 
 процессе с самым большим PID;
+
 ![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.2.png)
 
 суммарном использовании памяти различными пользователями.
