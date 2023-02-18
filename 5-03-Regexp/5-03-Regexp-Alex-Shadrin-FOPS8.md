@@ -146,9 +146,9 @@ http {
 суммарном использовании памяти различными пользователями.
 Пришлите скриншоты со скриптами и демонстрацией их работы
 
-![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.1png)
-![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.2png)
-![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.3png)
+![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/5-03-Regexp/3.3.png)
 
 Дополнительные задания (со звездочкой*)
 Эти задания дополнительные (не обязательные к выполнению) и никак не повлияют на получение вами зачета по этому домашнему заданию. Вы можете их выполнить, если хотите глубже и/или шире разобраться в материале.
