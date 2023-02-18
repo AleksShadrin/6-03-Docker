@@ -1,6 +1,0 @@
-ADDR a normal addr
-secretstart ADDR a secret addr
-ADDR another secret addr
-a third secret ADDR
-secretend
-ADDR normal too
