@@ -89,5 +89,5 @@ openssl x509 -subject -issuer -noout -in ca.pem
 openssl x509 -subject -issuer -noout -in certificate.crt
 openssl verify certificate.crt
 ```
-
+![](https://github.com/AleksShadrin/netology/blob/main/4-07-High-Level-Protocols/1.png)
 ------
