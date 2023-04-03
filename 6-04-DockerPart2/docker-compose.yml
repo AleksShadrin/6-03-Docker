@@ -7,8 +7,8 @@ services:
     environment:
       POSTGRES_DB: shadrinav-db
       POSTGRES_PASSWORD: shadrinav12!3!!
-#    ports:
-#      - "5432:5432"
+    ports:
+      - "5432:5432"
     networks:      
       shadrinav-my-netology-hw:        
         ipv4_address: 172.22.0.2    
