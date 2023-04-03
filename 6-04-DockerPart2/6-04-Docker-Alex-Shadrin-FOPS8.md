@@ -142,6 +142,7 @@ networks.
 Приложите скриншот консоли с проделанными действиями.
 
 ![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8_1.png)
 
 Дополнительные задания* (со звёздочкой)
 Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
