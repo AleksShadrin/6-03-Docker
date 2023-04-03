@@ -50,13 +50,12 @@ services:
       - zabbix-server
     container_name: shadrinav-netology-zabbix-frontend
     environment:
-      DB_SERVER_HOST: '172.18.0.2'
+      DB_SERVER_HOST: '172.22.0.2'
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: shadrinav12!3!!
-      ZBX_SERVER_HOST: "172.18.0.4"
+      ZBX_SERVER_HOST: "172.22.0.4"
     ports:
       - "80:8080"
-      - "443:8443"
     networks:
       shadrinav-my-netology-hw:
         ipv4_address: 172.22.0.5
