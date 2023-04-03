@@ -1,11 +1,11 @@
 #Домашнее задание к занятию «6.4. Docker. Часть 2»
 
-#Задание 1
+# Задание 1
 Напишите ответ в свободной форме, не больше одного абзаца текста.
 
 Установите Docker Compose и опишите, для чего он нужен и как может улучшить вашу жизнь.
 
-#Задание 2
+# Задание 2
 Выполните действия и приложите текст конфига на этом этапе.
 
 Создайте файл docker-compose.yml и внесите туда первичные настройки:
@@ -25,7 +25,7 @@ networks.
         config:      
         - subnet: 172.22.0.0/24
 
-#Задание 3
+# Задание 3
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите PostgreSQL с именем контейнера <ваши фамилия и инициалы>-netology-db.
@@ -45,7 +45,7 @@ networks.
         ipv4_address: 172.22.0.2    
       restart: always
 
-#Задание 4
+# Задание 4
 Выполните действия:
 
 Установите pgAdmin с именем контейнера <ваши фамилия и инициалы>-pgadmin.
@@ -70,9 +70,9 @@ networks.
           ipv4_address: 172.22.0.3
       restart: always
 
-[]!(https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/4.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/4.png)
 
-#Задание 5
+# Задание 5
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите Zabbix Server с именем контейнера <ваши фамилия и инициалы>-zabbix-netology.
@@ -95,7 +95,7 @@ networks.
           ipv4_address: 172.22.0.4
       restart: always 
 
-#Задание 6
+# Задание 6
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите Zabbix Frontend с именем контейнера <ваши фамилия и инициалы>-netology-zabbix-frontend.
@@ -121,7 +121,7 @@ networks.
           ipv4_address: 172.22.0.5
       restart: always
 
-#Задание 7
+# Задание 7
 Выполните действия.
 
 Настройте линки, чтобы контейнеры запускались только в момент, когда запущены контейнеры, от которых они зависят.
@@ -132,27 +132,27 @@ networks.
 скриншот команды docker ps;
 скриншот авторизации в админке Zabbix.
 
-[]!(https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7.png)
-[]!(https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7_!.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7_!.png)
 
-#Задание 8
+# Задание 8
 Выполните действия:
 
 Убейте все контейнеры и потом удалите их.
 Приложите скриншот консоли с проделанными действиями.
 
-[]!(https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8.png)
 
 Дополнительные задания* (со звёздочкой)
 Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
 
-#Задание 9*
+# Задание 9*
 Запустите свой сценарий на чистом железе без предзагруженных образов.
 
 Ответьте на вопросы в свободной форме:
 
 Сколько ушло времени на то, чтобы развернуть на чистом железе написанный вами сценарий?
 около 3,5 минут
-[]!(https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/9.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/9.png)
 Чем вы занимались в процессе создания сценария так, как это видите вы?
 Что бы вы улучшили в сценарии развёртывания?
