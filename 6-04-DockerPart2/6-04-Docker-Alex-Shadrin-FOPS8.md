@@ -35,15 +35,15 @@ networks.
 Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
 
     db:
-        image: postgres:15.1
-        container_name: shadrinav-netology-db 
-        environment:
-        POSTRGRES_DB: shadrinav-db
-        POSTGRES_PASSWORD: shadrinav12!3!!
-        networks:      
-        zabbix-network:        
-            ipv4_address: 172.22.0.2    
-        restart: always
+      image: postgres:15.1
+      container_name: shadrinav-netology-db 
+      environment:
+      POSTRGRES_DB: shadrinav-db
+      POSTGRES_PASSWORD: shadrinav12!3!!
+      networks:      
+      shadrinav-my-netology-hw:        
+        ipv4_address: 172.22.0.2    
+      restart: always
 
 Задание 4
 Выполните действия:
@@ -58,17 +58,17 @@ networks.
 скриншот админки pgAdmin.
 
     pgadmin:
-        image: dpage/pgadmin4
-        container_name: shadrinav-pgadmin
-        environment:
+      image: dpage/pgadmin4
+      container_name: shadrinav-pgadmin
+      environment:
         PGADMIN_DEFAULT_EMAIL: shadrinav@ilove-netology.com
         PGADMIN_DEFAULT_PASSWORD: 123
         ports:
         - "61231:80"
-        networks:
-        zabbix-network:
-            ipv4_address: 172.22.0.3
-        restart: always
+      networks:
+      shadrinav-my-netology-hw:
+          ipv4_address: 172.22.0.3
+      restart: always
 
 []!()
 
