@@ -79,7 +79,21 @@ networks.
 Настройте его подключение к вашему СУБД.
 Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
 
-
+    zabbix-server:
+      image: zabbix/zabbix-server-pgsql:ubuntu-6.4.0
+      links:
+        - db
+      container_name: shadrinav-zabbix-netology
+      environment:
+        DB_SERVER_HOST: '172.22.0.2'
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: shadrinav12!3!!
+      ports:
+        - "10051:10051"
+      networks:
+        shadrinav-my-netology-hw:
+          ipv4_address: 172.22.0.4
+      restart: always 
 
 Задание 6
 Выполните действия и приложите текст конфига текущего сервиса:

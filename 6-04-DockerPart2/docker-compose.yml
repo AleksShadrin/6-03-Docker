@@ -27,6 +27,22 @@ services:
         ipv4_address: 172.22.0.3
     restart: always
 
+  zabbix-server:
+    image: zabbix/zabbix-server-pgsql:ubuntu-6.4.0
+    links:
+      - db
+    container_name: shadrinav-zabbix-netology
+    environment:
+      DB_SERVER_HOST: '172.22.0.2'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: shadrinav12!3!!
+    ports:
+      - "10051:10051"
+    networks:
+      shadrinav-my-netology-hw:
+        ipv4_address: 172.22.0.4
+    restart: always    
+
 
 networks:  
   shadrinav-my-netology-hw:    
