@@ -8,7 +8,7 @@ services:
       POSTRGRES_DB: shadrinav-db
       POSTGRES_PASSWORD: shadrinav12!3!!
     networks:      
-      zabbix-network:        
+      shadrinav-my-netology-hw:        
         ipv4_address: 172.22.0.2    
     restart: always
 
@@ -21,7 +21,7 @@ services:
     ports:
       - "61231:80"
     networks:
-      zabbix-network:
+      shadrinav-my-netology-hw:
         ipv4_address: 172.22.0.3
     restart: always
 
