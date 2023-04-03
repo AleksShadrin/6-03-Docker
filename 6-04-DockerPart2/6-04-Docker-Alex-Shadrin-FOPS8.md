@@ -15,6 +15,16 @@ services;
 networks.
 При выполнении задания используйте подсеть 172.22.0.0. Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw.
 
+    version: '3.1'
+
+    #services:
+    networks:  
+    shadrinav-my-netology-hw:    
+        driver: bridge    
+        ipam:      
+        config:      
+        - subnet: 172.22.0.0/24
+
 Задание 3
 Выполните действия и приложите текст конфига текущего сервиса:
 
@@ -23,6 +33,18 @@ networks.
 Задайте пароль пользователя postgres, как <ваши фамилия и инициалы>12!3!!
 Пример названия контейнера: ivanovii-netology-db.
 Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
+
+    db:
+        image: postgres:15.1
+        container_name: shadrinav-netology-db 
+        environment:
+        POSTRGRES_DB: shadrinav-db
+        POSTGRES_PASSWORD: shadrinav12!3!!
+        networks:      
+        zabbix-network:        
+            ipv4_address: 172.22.0.2    
+        restart: always
+
 Задание 4
 Выполните действия:
 
@@ -34,12 +56,31 @@ networks.
 
 текст конфига текущего сервиса;
 скриншот админки pgAdmin.
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: shadrinav-pgadmin
+        environment:
+        PGADMIN_DEFAULT_EMAIL: shadrinav@ilove-netology.com
+        PGADMIN_DEFAULT_PASSWORD: 123
+        ports:
+        - "61231:80"
+        networks:
+        zabbix-network:
+            ipv4_address: 172.22.0.3
+        restart: always
+
+[]!()
+
 Задание 5
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите Zabbix Server с именем контейнера <ваши фамилия и инициалы>-zabbix-netology.
 Настройте его подключение к вашему СУБД.
 Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
+
+
+
 Задание 6
 Выполните действия и приложите текст конфига текущего сервиса:
 
