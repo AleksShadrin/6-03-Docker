@@ -1,11 +1,11 @@
 #Домашнее задание к занятию «6.4. Docker. Часть 2»
 
-# Задание 1
+### Задание 1
 Напишите ответ в свободной форме, не больше одного абзаца текста.
 
 Установите Docker Compose и опишите, для чего он нужен и как может улучшить вашу жизнь.
 
-# Задание 2
+### Задание 2
 Выполните действия и приложите текст конфига на этом этапе.
 
 Создайте файл docker-compose.yml и внесите туда первичные настройки:
@@ -16,16 +16,15 @@ networks.
 При выполнении задания используйте подсеть 172.22.0.0. Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw.
 
     version: '3.1'
-
-    #services:
+    services:
     networks:  
-    shadrinav-my-netology-hw:    
+      shadrinav-my-netology-hw:    
         driver: bridge    
         ipam:      
-        config:      
-        - subnet: 172.22.0.0/24
+          config:      
+          - subnet: 172.22.0.0/24
 
-# Задание 3
+### Задание 3
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите PostgreSQL с именем контейнера <ваши фамилия и инициалы>-netology-db.
@@ -35,17 +34,22 @@ networks.
 Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
 
     db:
-      image: postgres:15.1
+      image: postgres:latest
       container_name: shadrinav-netology-db 
+      ports: 
+        - 5432:5432
+      volumes:
+        - ./pg_data:/var/lib/postgresql/data/pgdata  
       environment:
-      POSTRGRES_DB: shadrinav-db
-      POSTGRES_PASSWORD: shadrinav12!3!!
+        POSTGRES_PASSWORD: shadrinav12!3!!
+        POSTRGRES_DB: shadrinav-db
+        PGDATA: /var/lib/postgresql/data/pgdata
       networks:      
-      shadrinav-my-netology-hw:        
-        ipv4_address: 172.22.0.2    
+        shadrinav-my-netology-hw:        
+          ipv4_address: 172.22.0.2    
       restart: always
 
-# Задание 4
+### Задание 4
 Выполните действия:
 
 Установите pgAdmin с именем контейнера <ваши фамилия и инициалы>-pgadmin.
@@ -66,13 +70,13 @@ networks.
         ports:
         - "61231:80"
       networks:
-      shadrinav-my-netology-hw:
+        shadrinav-my-netology-hw:
           ipv4_address: 172.22.0.3
       restart: always
 
 ![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/4.png)
 
-# Задание 5
+### Задание 5
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите Zabbix Server с именем контейнера <ваши фамилия и инициалы>-zabbix-netology.
@@ -81,8 +85,6 @@ networks.
 
     zabbix-server:
       image: zabbix/zabbix-server-pgsql:ubuntu-6.4.0
-      links:
-        - db
       container_name: shadrinav-zabbix-netology
       environment:
         DB_SERVER_HOST: '172.22.0.2'
@@ -95,7 +97,7 @@ networks.
           ipv4_address: 172.22.0.4
       restart: always 
 
-# Задание 6
+### Задание 6
 Выполните действия и приложите текст конфига текущего сервиса:
 
 Установите Zabbix Frontend с именем контейнера <ваши фамилия и инициалы>-netology-zabbix-frontend.
@@ -104,9 +106,6 @@ networks.
 
     zabbix_wgui:
       image: zabbix/zabbix-web-nginx-pgsql
-      links:
-        - db
-        - zabbix-server
       container_name: shadrinav-netology-zabbix-frontend
       environment:
         DB_SERVER_HOST: '172.18.0.2'
@@ -121,7 +120,8 @@ networks.
           ipv4_address: 172.22.0.5
       restart: always
 
-# Задание 7
+### Задание 7
+
 Выполните действия.
 
 Настройте линки, чтобы контейнеры запускались только в момент, когда запущены контейнеры, от которых они зависят.
@@ -129,6 +129,81 @@ networks.
 В качестве решения приложите:
 
 текст конфига целиком;
+
+    version: '3.1'
+
+    services:
+    db:
+        image: postgres:latest
+        container_name: shadrinav-netology-db 
+        ports: 
+        - 5432:5432
+        volumes:
+        - ./pg_data:/var/lib/postgresql/data/pgdata  
+        environment:
+        POSTGRES_PASSWORD: shadrinav12!3!!
+        POSTRGRES_DB: shadrinav-db
+        PGDATA: /var/lib/postgresql/data/pgdata
+        networks:      
+        shadrinav-my-netology-hw:        
+            ipv4_address: 172.22.0.2    
+        restart: always
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: shadrinav-pgadmin
+        environment:
+        PGADMIN_DEFAULT_EMAIL: shadrinav@ilove-netology.com
+        PGADMIN_DEFAULT_PASSWORD: 123
+        ports:
+        - "61231:80"
+        networks:
+        shadrinav-my-netology-hw:
+            ipv4_address: 172.22.0.3
+        restart: always
+
+    zabbix-server:
+        image: zabbix/zabbix-server-pgsql:ubuntu-6.4.0
+        container_name: shadrinav-zabbix-netology
+        links:
+        - db
+        environment:
+        DB_SERVER_HOST: '172.22.0.2'
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: shadrinav12!3!!
+        ports:
+        - "10051:10051"
+        networks:
+        shadrinav-my-netology-hw:
+            ipv4_address: 172.22.0.4
+        restart: always 
+
+    zabbix_wgui:
+        image: zabbix/zabbix-web-nginx-pgsql
+        links:
+        - db
+        - zabbix-server
+        container_name: shadrinav-netology-zabbix-frontend
+        environment:
+        DB_SERVER_HOST: '172.18.0.2'
+        POSTGRES_USER: 'postgres'
+        POSTGRES_PASSWORD: shadrinav12!3!!
+        ZBX_SERVER_HOST: "172.18.0.4"
+        ports:
+        - "80:8080"
+        - "443:8443"
+        networks:
+        shadrinav-my-netology-hw:
+            ipv4_address: 172.22.0.5
+        restart: always
+
+    networks:  
+    shadrinav-my-netology-hw:    
+        driver: bridge    
+        ipam:      
+        config:      
+        - subnet: 172.22.0.0/24
+
 скриншот команды docker ps;
 скриншот авторизации в админке Zabbix.
 
@@ -146,14 +221,3 @@ networks.
 
 Дополнительные задания* (со звёздочкой)
 Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
-
-# Задание 9*
-Запустите свой сценарий на чистом железе без предзагруженных образов.
-
-Ответьте на вопросы в свободной форме:
-
-Сколько ушло времени на то, чтобы развернуть на чистом железе написанный вами сценарий?
-около 3,5 минут
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/9.png)
-Чем вы занимались в процессе создания сценария так, как это видите вы?
-Что бы вы улучшили в сценарии развёртывания?

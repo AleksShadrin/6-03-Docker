@@ -2,13 +2,16 @@ version: '3.1'
 
 services:
   db:
-    image: postgres:15.1
+    image: postgres:latest
     container_name: shadrinav-netology-db 
+    ports: 
+      - 5432:5432
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/pgdata  
     environment:
-      POSTGRES_DB: shadrinav-db
       POSTGRES_PASSWORD: shadrinav12!3!!
-    ports:
-      - "5432:5432"
+      POSTRGRES_DB: shadrinav-db
+      PGDATA: /var/lib/postgresql/data/pgdata
     networks:      
       shadrinav-my-netology-hw:        
         ipv4_address: 172.22.0.2    
@@ -29,9 +32,9 @@ services:
 
   zabbix-server:
     image: zabbix/zabbix-server-pgsql:ubuntu-6.4.0
+    container_name: shadrinav-zabbix-netology
     links:
       - db
-    container_name: shadrinav-zabbix-netology
     environment:
       DB_SERVER_HOST: '172.22.0.2'
       POSTGRES_USER: postgres
@@ -41,7 +44,7 @@ services:
     networks:
       shadrinav-my-netology-hw:
         ipv4_address: 172.22.0.4
-    restart: always    
+    restart: always 
 
   zabbix_wgui:
     image: zabbix/zabbix-web-nginx-pgsql
@@ -50,12 +53,13 @@ services:
       - zabbix-server
     container_name: shadrinav-netology-zabbix-frontend
     environment:
-      DB_SERVER_HOST: '172.22.0.2'
+      DB_SERVER_HOST: '172.18.0.2'
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: shadrinav12!3!!
-      ZBX_SERVER_HOST: "172.22.0.4"
+      ZBX_SERVER_HOST: "172.18.0.4"
     ports:
       - "80:8080"
+      - "443:8443"
     networks:
       shadrinav-my-netology-hw:
         ipv4_address: 172.22.0.5
