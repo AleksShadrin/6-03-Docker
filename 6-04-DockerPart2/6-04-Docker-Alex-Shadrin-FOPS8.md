@@ -1,4 +1,4 @@
-#Домашнее задание к занятию «6.4. Docker. Часть 2»
+# Домашнее задание к занятию «6.4. Docker. Часть 2»
 
 ### Задание 1
 Напишите ответ в свободной форме, не больше одного абзаца текста.
@@ -74,7 +74,7 @@ networks.
           ipv4_address: 172.22.0.3
       restart: always
 
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/4.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/screenshots/4.png)
 
 ### Задание 5
 Выполните действия и приложите текст конфига текущего сервиса:
@@ -207,8 +207,8 @@ networks.
 скриншот команды docker ps;
 скриншот авторизации в админке Zabbix.
 
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7.png)
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/7_!.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/screenshots/7.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/screenshots/7_1.png)
 
 # Задание 8
 Выполните действия:
@@ -216,8 +216,5 @@ networks.
 Убейте все контейнеры и потом удалите их.
 Приложите скриншот консоли с проделанными действиями.
 
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8.png)
-![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/8_1.png)
-
-Дополнительные задания* (со звёздочкой)
-Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/screenshots/8.png)
+![](https://github.com/AleksShadrin/netology/blob/main/6-04-DockerPart2/screenshots/8_1.png)
