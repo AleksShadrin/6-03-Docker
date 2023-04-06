@@ -3,8 +3,8 @@
   hosts: servers
   tasks:
     - name: copy archive
-        copy: 
-          src:https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz 
+        fetch: 
+          src: https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz 
           dest: /tmp/netology/
       notify:
         -extract archive
