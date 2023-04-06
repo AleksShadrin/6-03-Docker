@@ -33,6 +33,7 @@
       apt:
         name: tuned
         update_cache: yes
+        install_recommends: yes
     - name: task 2 in playbook 2
       service:
         name: tuned
