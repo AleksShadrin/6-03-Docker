@@ -24,16 +24,19 @@
         dest: ~/netology/kafka/
         remote_src: yes
   tags: Play1
-# - name: Play2
-#   hosts: servers
-#   become: yes
-#   tasks:
-#     - name: task 1 in playbook 2
-      
-#     - name: task 2 in playbook 2
-#         service:
-#           name: sshd
-#           state: restarted
+- name: Play2
+  hosts: servers
+  become: yes
+  tasks:
+    - name: install tuned
+      apt:
+        update_cache: yes
+        install: tuned
+    - name: task 2 in playbook 2
+        service:
+          name: tumed
+          state: enabled
+  -tags: play2
 # - name: Play 1
 #   hosts: servers
 #   become: yes
