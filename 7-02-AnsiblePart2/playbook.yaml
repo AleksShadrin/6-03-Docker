@@ -1,0 +1,31 @@
+---
+- name: Play 1
+  hosts: servers
+  tasks:
+    - name: copy archive
+      wget:
+        https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz
+      notify:
+        -extract archive
+  handlers:
+    - name: extract archive
+      tar: 
+  tags: Play1
+# - name: Play2
+#   hosts: servers
+#   become: yes
+#   tasks:
+#     - name: task 1 in playbook 2
+      
+#     - name: task 2 in playbook 2
+#         service:
+#           name: sshd
+#           state: restarted
+# - name: Play 1
+#   hosts: servers
+#   become: yes
+#   tasks:
+#     - name: copy archive
+#       notify:
+#   tags: Play1
+...
