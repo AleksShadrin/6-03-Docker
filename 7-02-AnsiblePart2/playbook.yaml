@@ -30,8 +30,8 @@
   tasks:
     - name: install tuned
       apt:
+        name: tuned
         update_cache: yes
-        install: tuned
     - name: task 2 in playbook 2
         service:
           name: tumed
