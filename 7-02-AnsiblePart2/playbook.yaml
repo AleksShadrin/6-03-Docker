@@ -3,15 +3,14 @@
   hosts: servers
   tasks:
     - name: copy archive
-        fetch: 
-          src: https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz 
-          dest: /tmp/netology/
+        get_url: 
+          url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
+          dest: ~/netology/
       notify:
         -extract archive
   handlers:
     - name: extract archive
-      command:
-        unarhive: /tmp/netology/kafka-3.4.0-src.tgz
+      unarhive: ~/kafka-3.4.0-src.tgz
 #      tar: 
   tags: Play1
 # - name: Play2
