@@ -2,8 +2,7 @@
 - name: Play 1
   hosts: servers
   pre_tasks:
-    mkdir: ~/netology/
-    mkdir: ~/kafka/
+    mkdir: ~/netology/ ~/kafka/
   tasks:
     - name: copy archive
       get_url: 
