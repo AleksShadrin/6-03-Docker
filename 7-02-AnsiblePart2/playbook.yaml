@@ -9,7 +9,7 @@
         -extract archive
   handlers:
     - name: extract archive
-      tar: 
+#      tar: 
   tags: Play1
 # - name: Play2
 #   hosts: servers
