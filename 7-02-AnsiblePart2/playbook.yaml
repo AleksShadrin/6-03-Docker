@@ -1,6 +1,9 @@
 ---
 - name: Play 1
   hosts: servers
+  pre_tasks:
+    mkdir: ~/netology/
+    mkdir: ~/kafka/
   tasks:
     - name: copy archive
       get_url: 
@@ -13,7 +16,6 @@
       unarchive: 
         src: ~/kafka-3.4.0-src.tgz
         dest: ~/kafka/
-#      tar: 
   tags: Play1
 # - name: Play2
 #   hosts: servers
