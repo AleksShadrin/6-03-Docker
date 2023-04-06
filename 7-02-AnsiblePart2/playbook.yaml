@@ -9,7 +9,8 @@
         -extract archive
   handlers:
     - name: extract archive
-      unarhive: /root/kafka-3.4.0-src.tgz
+      command:
+        unarhive: /root/kafka-3.4.0-src.tgz
 #      tar: 
   tags: Play1
 # - name: Play2
