@@ -20,7 +20,7 @@
   handlers:
     - name: "extract archive"
       unarchive: 
-        src: ~/kafka-3.4.0-src.tgz
+        src: ~/netology/kafka-3.4.0-src.tgz
         dest: ~/netology/kafka/
   tags: Play1
 # - name: Play2
