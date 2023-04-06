@@ -20,8 +20,9 @@
   handlers:
     - name: "extract archive"
       unarchive: 
-        remote_src: ~/netology/kafka-3.4.0-src.tgz
+        src: ~/netology/kafka-3.4.0-src.tgz
         dest: ~/netology/kafka/
+        remote_src: yes
   tags: Play1
 # - name: Play2
 #   hosts: servers
