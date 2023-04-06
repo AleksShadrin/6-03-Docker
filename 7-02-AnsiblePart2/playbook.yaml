@@ -30,7 +30,7 @@
   become: yes
   tasks:
     - name: install tuned
-      apt:
+      apt-get:
         name: tuned
         update_cache: yes
         install_recommends: yes
