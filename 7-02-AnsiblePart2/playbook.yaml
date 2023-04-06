@@ -3,9 +3,13 @@
   hosts: servers
   pre_tasks:
     - name: create folder netology
-      mkdir: ~/netology/
+      file:
+        path: ~/netology/
+        state: directory
     - name: create folder kafka
-      mkdir: ~/netology/kafka/
+      file: 
+        path: ~/netology/kafka/
+        state: directory
   tasks:
     - name: copy archive
       get_url: 
