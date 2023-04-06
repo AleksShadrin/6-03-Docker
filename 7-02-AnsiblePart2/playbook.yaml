@@ -37,7 +37,7 @@
       service:
         name: tuned
         state: enabled
-  - tags: play2
+  tags: play2
 # - name: Play 1
 #   hosts: servers
 #   become: yes
