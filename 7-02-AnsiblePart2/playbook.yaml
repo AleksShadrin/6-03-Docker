@@ -16,7 +16,7 @@
         url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
         dest: ~/netology/
       notify:
-        -extract archive
+        - extract archive
   handlers:
     - name: extract archive
       unarchive: 
