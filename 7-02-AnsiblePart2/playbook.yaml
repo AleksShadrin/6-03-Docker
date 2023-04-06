@@ -3,9 +3,9 @@
   hosts: servers
   tasks:
     - name: copy archive
-        get_url: 
-          url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
-          dest: ~/netology/
+      get_url: 
+        url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
+        dest: ~/netology/
       notify:
         -extract archive
   handlers:
