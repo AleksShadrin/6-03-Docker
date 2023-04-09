@@ -1,6 +1,7 @@
 ---
 - name: Play 1
   hosts: servers
+  become: yes
   pre_tasks:
     - name: create folder netology
       file:
