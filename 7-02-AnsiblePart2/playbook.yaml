@@ -4,24 +4,24 @@
   pre_tasks:
     - name: create folder netology
       file:
-        path: ~/netology/
+        path: /tmp/netology/
         state: directory
     - name: create folder kafka
       file: 
-        path: ~/netology/kafka/
+        path: /tmp/netology/kafka/
         state: directory
   tasks:
     - name: copy archive
       get_url: 
         url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
-        dest: ~/netology/
+        dest: /tmp/netology/
       notify:
         - extract archive
   handlers:
     - name: "extract archive"
       unarchive: 
-        src: ~/netology/kafka-3.4.0-src.tgz
-        dest: ~/netology/kafka/
+        src: /tmp/netology/kafka-3.4.0-src.tgz
+        dest: /tmp/netology/kafka/
         remote_src: yes
   tags: Play1
 
