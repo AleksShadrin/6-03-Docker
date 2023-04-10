@@ -26,7 +26,7 @@
         remote_src: yes
   tags: play1
 
-- name: Play2
+- name: Play 2
   hosts: servers
   become: yes
   tasks:
