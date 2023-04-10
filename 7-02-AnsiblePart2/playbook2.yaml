@@ -21,6 +21,10 @@
       apt:
         name: tuned
         state: absent
+    - name: delete tuned strtup
+      service:
+        name: tuned
+        enabled: false
   tags: play2
 
 # - name: Play 3
