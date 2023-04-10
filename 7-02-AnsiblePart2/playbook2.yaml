@@ -21,7 +21,7 @@
       service:
         name: tuned
         enabled: false
-        state: stoped
+        state: stopped
     - name: install tuned
       apt:
         name: tuned
