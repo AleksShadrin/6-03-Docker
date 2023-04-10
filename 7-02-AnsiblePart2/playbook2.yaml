@@ -13,7 +13,7 @@
         state: absent
   tags: play1
 
-- name: Play2
+- name: Play 2
   hosts: servers
   become: yes
   tasks:
@@ -22,11 +22,10 @@
         name: tuned
         enabled: false
         state: stopped
-    - name: install tuned
+    - name: delete tuned
       apt:
         name: tuned
         state: absent
-
   tags: play2
 
 # - name: Play 3
