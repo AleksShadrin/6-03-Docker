@@ -4,3 +4,8 @@ vagrant up
 vagrant ssh
 
 sudo passwd
+
+
+на локальной машине
+
+ssh-keygen -t rsa -b 2048 
