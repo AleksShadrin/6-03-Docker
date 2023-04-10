@@ -2,28 +2,15 @@
 - name: Play 1
   hosts: servers
   become: yes
-  pre_tasks:
-    - name: create folder netology
+  tasks:
+    - name: delete archive
       file:
-        path: ~/netology/
-        state: directory
-    - name: create folder kafka
+        path ~/netology/kafka-3.4.0-src.tgz
+        state: absent
+    - name: delete catalog kafka
       file: 
         path: ~/netology/kafka/
-        state: directory
-  tasks:
-    - name: copy archive
-      get_url: 
-        url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
-        dest: ~/netology/
-      notify:
-        - extract archive
-  handlers:
-    - name: "extract archive"
-      unarchive: 
-        src: ~/netology/kafka-3.4.0-src.tgz
-        dest: ~/netology/kafka/
-        remote_src: yes
+        state: absent
   tags: play1
 
 - name: Play2
@@ -33,12 +20,7 @@
     - name: install tuned
       apt:
         name: tuned
-        update_cache: yes
-    - name: add tuned to startup
-      service:
-        name: tuned
-        enabled: true
-        state: started
+        state: absent
   tags: play2
 
 - name: Play 3
