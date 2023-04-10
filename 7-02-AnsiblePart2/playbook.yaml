@@ -49,6 +49,6 @@
       blockinfile:
         path: /etc/motd
         backup: yes
-        block: "{{ new_greeting }}""
+        block: "{{ new_greeting }}"
   tags: play3
 ...
