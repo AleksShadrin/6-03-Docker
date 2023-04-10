@@ -5,7 +5,7 @@
   tasks:
     - name: delete archive
       file:
-        path ~/netology/kafka-3.4.0-src.tgz
+        path: ~/netology/kafka-3.4.0-src.tgz
         state: absent
     - name: delete catalog kafka
       file: 
