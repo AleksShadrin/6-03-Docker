@@ -41,11 +41,11 @@
         state: started
   tags: play2
 
-- name: Play 3
-  hosts: servers
-  become: yes
-  tasks:
-    - name: change motd
-      debug: msg: "{{ lookup('file', '/etc/motd') }}"
-  tags: play3
+# - name: Play 3
+#   hosts: servers
+#   become: yes
+#   tasks:
+#     - name: change motd
+#       debug: msg: "{{ lookup('file', '/etc/motd') }}"
+#   tags: play3
 ...
