@@ -9,13 +9,21 @@
 Плейбуки должны: 
 
 1. Скачать какой-либо архив, создать папку для распаковки и распаковать скаченный архив. Например, можете использовать [официальный сайт](https://kafka.apache.org/downloads) и зеркало Apache Kafka. При этом можно скачать как исходный код, так и бинарные файлы, запакованные в архив — в нашем задании не принципиально.
+
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.01.png)
+
 2. Установить пакет tuned из стандартного репозитория вашей ОС. Запустить его, как демон — конфигурационный файл systemd появится автоматически при установке. Добавить tuned в автозагрузку.
+
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.02.png)
+
 3. Изменить приветствие системы (motd) при входе на любое другое. Пожалуйста, в этом задании используйте переменную для задания приветствия. Переменную можно задавать любым удобным способом.
 
-[Playbook](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/playbook.yaml)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.3.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.03.png)
 
-
-
+[Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/playbook.yaml)
 
 
 ### Задание 2
