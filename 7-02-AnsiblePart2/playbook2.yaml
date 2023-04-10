@@ -17,14 +17,16 @@
   hosts: servers
   become: yes
   tasks:
-    - name: install tuned
-      apt:
-        name: tuned
-        state: absent
     - name: delete tuned strtup
       service:
         name: tuned
         enabled: false
+        state: stoped
+    - name: install tuned
+      apt:
+        name: tuned
+        state: absent
+
   tags: play2
 
 # - name: Play 3
