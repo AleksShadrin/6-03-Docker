@@ -24,7 +24,7 @@
         src: ~/netology/kafka-3.4.0-src.tgz
         dest: ~/netology/kafka/
         remote_src: yes
-  tags: Play1
+  tags: play1
 
 - name: Play2
   hosts: servers
@@ -40,11 +40,12 @@
         enabled: true
         state: started
   tags: play2
-# - name: Play 1
-#   hosts: servers
-#   become: yes
-#   tasks:
-#     - name: copy archive
-#       notify:
-#   tags: Play1
+
+- name: Play 3
+  hosts: servers
+  become: yes
+  tasks:
+    - name: change motd
+      debug: msg: "{{ lookup('file', '/etc/motd') }}"
+  tags: play3
 ...
