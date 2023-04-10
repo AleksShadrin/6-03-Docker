@@ -47,7 +47,9 @@
   tasks:
     - name: backup motd
       copy:
-        path: /etc/motd
+        src: /etc/motd
+        dest: ~/
+        remote_src: yes
         backup: yes
     - name: delete motd
       file:
