@@ -1,0 +1,51 @@
+---
+- name: Play 1
+  hosts: servers
+  become: yes
+  pre_tasks:
+    - name: create folder netology
+      file:
+        path: ~/netology/
+        state: directory
+    - name: create folder kafka
+      file: 
+        path: ~/netology/kafka/
+        state: directory
+  tasks:
+    - name: copy archive
+      get_url: 
+        url: "https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz"
+        dest: ~/netology/
+      notify:
+        - extract archive
+  handlers:
+    - name: "extract archive"
+      unarchive: 
+        src: ~/netology/kafka-3.4.0-src.tgz
+        dest: ~/netology/kafka/
+        remote_src: yes
+  tags: play1
+
+- name: Play2
+  hosts: servers
+  become: yes
+  tasks:
+    - name: install tuned
+      apt:
+        name: tuned
+        update_cache: yes
+    - name: add tuned to startup
+      service:
+        name: tuned
+        enabled: true
+        state: started
+  tags: play2
+
+- name: Play 3
+  hosts: servers
+  become: yes
+  tasks:
+    - name: change motd
+      debug: msg: "{{ lookup('file', '/etc/motd') }}"
+  tags: play3
+...
