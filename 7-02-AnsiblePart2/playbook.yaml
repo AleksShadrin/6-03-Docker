@@ -45,11 +45,19 @@
   hosts: servers
   become: yes
   tasks:
-    - name: change motd
-      blockinfile:
+    - name: backup motd
+      copy:
         path: /etc/motd
         backup: yes
-        block: ""
+    - name: delete motd
+      file:
+        path: /etc/motd
         state: absent
+    - name: new motd
+      blockinfile:
+        path: /etc/motd
+        create: true
+        block: "{{ new_greeting }}"
+        mode: '644'
   tags: play3
 ...
