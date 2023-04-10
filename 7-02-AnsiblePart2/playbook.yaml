@@ -59,7 +59,7 @@
       blockinfile:
         path: /etc/motd
         create: true
-        block: "ipv4_address: {{ ansible_all_ipv4_addresses[1] }}\n hostname: {{ ansible_hostname  }}\n  Have a nice day!"
+        block: "{{ new_greeting }}"
         mode: '644'
   tags: play3
 ...
