@@ -1,3 +1,7 @@
+[all]
 [servers]
 deb11_master
 deb11_slave
+
+[servers:vars]
+ansible_python_interpreter=/usr/bin/python3
