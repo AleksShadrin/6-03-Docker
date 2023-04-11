@@ -52,7 +52,7 @@
             create: true
             block: "ipv4_address: {{ ansible_all_ipv4_addresses[1] }}\n hostname: {{ ansible_hostname  }}\n  Have a nice day!"
             mode: '644'
-    tags: play3
+      tags: play3
 
 
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/2.png)
