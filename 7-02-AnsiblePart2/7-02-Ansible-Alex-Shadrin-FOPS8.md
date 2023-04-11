@@ -71,3 +71,9 @@
 2. Сконфигурировать файл index.html c выводом характеристик для каждого компьютера. Необходимо включить CPU, RAM, величину первого HDD, IP-адрес. Используйте [Ansible facts](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html) и [jinja2-template](https://linuxways.net/centos/how-to-use-the-jinja2-template-in-ansible/)
 3. Открыть порт 80, если необходимо, запустить сервер и добавить его в автозагрузку.
 4. Сделать проверку доступности веб-сайта (ответ 200, модуль uri).
+
+[Код роли](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/apache)
+[Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/install_apache_playbook.yaml)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.3.png)

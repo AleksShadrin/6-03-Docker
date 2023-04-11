@@ -1,0 +1,14 @@
+all:
+  children:
+    servers:
+      hosts:
+        deb11_master:
+        deb11_slave:
+      children:
+        apache_prod:
+          hosts: deb11_master
+        apache_test:
+          hosts: deb11_slave
+      vars: 
+        ansible_python_interpreter: /usr/bin/python3
+      

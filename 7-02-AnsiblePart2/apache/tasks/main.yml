@@ -1,0 +1,29 @@
+# tasks file for apache
+---
+
+- name: install apache
+  apt:
+    update_cache: yes
+    name: apache2
+    state: latest
+
+- name: enable apache
+  service:
+    name: apache2
+    enabled: yes
+    state: started
+
+- name: copy index
+  template:
+    dest: /var/www/html/index.html
+    src: index.html.j2
+  tags: copy
+
+- name: avaliablity check
+  uri:
+    url: "http://{{ ansible_all_ipv4_addresses[1] }}:80"
+    return_content: true
+  register: result
+  tags: check
+...    
+

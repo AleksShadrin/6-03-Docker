@@ -1,0 +1,20 @@
+---
+
+- name: install apache
+  hosts: servers  
+  tasks:
+    - name: 1
+      apt:
+        update_cache: yes
+        name: apache2
+        state: absent      
+    - name: 2
+      service:
+        name: apache2
+        enabled: no
+        state: stopped
+    - name: 3
+      file:
+        path: /var/www/html/index.html
+        state: absent
+...  
