@@ -23,7 +23,7 @@
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.3.png)
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/1.03.png)
 
-[Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/playbook.yaml)
+### [Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/playbook.yaml)
 
 
 ### Задание 2
@@ -72,8 +72,8 @@
 3. Открыть порт 80, если необходимо, запустить сервер и добавить его в автозагрузку.
 4. Сделать проверку доступности веб-сайта (ответ 200, модуль uri).
 
-[Код роли](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/apache)
-[Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/install_apache_playbook.yaml)
+### [Код роли](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/apache)
+### [Код плейбука](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/install_apache_playbook.yaml)
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.1.png)
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.2.png)
 ![](https://github.com/AleksShadrin/netology/blob/main/7-02-AnsiblePart2/3.3.png)
