@@ -19,3 +19,8 @@
 7-03-TerraformPart2/terraform/meta.yaml
 7-03-TerraformPart2/terraform/terraform.tfstate
 7-03-TerraformPart2/terraform/terraform.tfstate.backup
+terraform/meta.yaml
+terraform/main_backup.tf
+terraform/main.tf
+terraform/install
+terraform/create-vm.tf
