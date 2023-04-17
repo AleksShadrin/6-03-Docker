@@ -123,6 +123,6 @@
     <h2>RAM: {{ ansible_memory_mb['real']['total'] }} MB</h2>
     <h2>ip address: {{ ansible_all_ipv4_addresses[0] }}</h2>
 
-![](https://github.com/AleksShadrin/netology/tree/main/7-03-TerraformPart2/screenshots/1.png)
-![](https://github.com/AleksShadrin/netology/tree/main/7-03-TerraformPart2/screenshots/2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-03-TerraformPart2/screenshots/1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/7-03-TerraformPart2/screenshots/2.png)
 
