@@ -24,3 +24,4 @@ terraform/main_backup.tf
 terraform/main.tf
 terraform/install
 terraform/create-vm.tf
+sdvps-homeworks/8-03-hw/
