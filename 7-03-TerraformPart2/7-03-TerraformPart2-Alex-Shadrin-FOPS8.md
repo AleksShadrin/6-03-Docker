@@ -1,15 +1,5 @@
 # Домашнее задание к занятию «Подъём инфраструктуры в Yandex Cloud»
 
-### Оформление домашнего задания
-
-1. Домашнее задание выполните в [Google Docs](https://docs.google.com/) и отправьте на проверку ссылку на ваш документ в личном кабинете.  
-1. В названии файла укажите номер лекции и фамилию студента. Пример названия: 7.3. Подъём инфраструктуры в Yandex Cloud — Александр Александров.
-1. Перед отправкой проверьте, что доступ для просмотра открыт всем, у кого есть ссылка. Если нужно прикрепить дополнительные ссылки, добавьте их в свой Google Docs.
-
-Любые вопросы по решению задач задавайте в чате учебной группы.
-
- ---
-
 ### Задание 1 
 
 **Выполните действия, приложите скриншот скриптов, скриншот выполненного проекта.**
@@ -22,114 +12,117 @@
 
 Для выполнения этого задания нужно сгенирировать SSH-ключ командой ssh-kengen. Добавить в конфигурацию Terraform ключ в поле:
 
-```
- metadata = {
-    user-data = "${file("./meta.txt")}"
-  }
-``` 
+### Конфиги terraform:
 
-В файле meta прописать: 
- 
-```
- users:
-  - name: user
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-      - ssh-rsa  xxx
-```
-Где xxx — это ключ из файла /home/"name_ user"/.ssh/id_rsa.pub. Примерная конфигурация Terraform:
+### main.tf
 
-```
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
+    terraform {
+      required_providers {
+        yandex = {
+          source = "yandex-cloud/yandex"
+        }
+      }
+      required_version = ">= 0.13"
     }
-  }
-}
-provider "yandex" {
-  token     = "xxx"
-  cloud_id  = "xxx"
-  folder_id = "xxx"
-  zone      = "ru-central1-a"
-}
-resource "yandex_compute_instance" "vm-1" {
-  name = "terraform1"
-  resources {
-    cores  = 2
-    memory = 2
-  }
-  boot_disk {
-    initialize_params {
-      image_id = "fd87kbts7j40q5b9rpjr"
+    provider "yandex" {
+      token     = "y0_-OCUj23SI0U"
+      cloud_id  = "1g7ir1q4u3s"
+      folder_id = "b1gle4pc3"
+      zone = "ru-central1-a"
     }
-  }
-  network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
-    nat       = true
-  }
-  
-  metadata = {
-    user-data = "${file("./meta.txt")}"
-  }
-}
-resource "yandex_vpc_network" "network-1" {
-  name = "network1"
-}
-resource "yandex_vpc_subnet" "subnet-1" {
-  name           = "subnet1"
-  zone           = "ru-central1-b"
-  network_id     = yandex_vpc_network.network-1.id
-  v4_cidr_blocks = ["192.168.10.0/24"]
-}
-output "internal_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.ip_address
-}
-output "external_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
-}
-```
 
-В конфигурации Ansible указать:
+### meta.yaml:
+    #cloud-config
+    users:
+      - name: user
+        groups: sudo
+        shell: /bin/bash
+        sudo: [ALL=(ALL) NOPASSWD:ALL]
+        ssh_authorized_keys:
+            - ssh-rsa AAAAB3NzaC1 root@bullseye
 
-* внешний IP-адрес машины, полученный из output external_ ip_ address_ vm_1, в файле hosts;
-* доступ в файле plabook *yml поля hosts.
+    timezone: europe/moscow
+    package_update : true
+    packages:
+      - nginx
+    runcmd:
+      - [systemctl, nginx-reload]
+      - [systemctl, enable, nginx.service]
+      - [systemctl, --no-block, nginx.service]
 
-```
-- hosts: 138.68.85.196
-  remote_user: user
-  tasks:
-    - service:
-        name: nginx
-        state: started
+### create-vm.tf
+
+    resource "yandex_compute_instance" "vm-1" {
+      name = "terraform1"
+      allow_stopping_for_update = true
+      resources {
+        core_fraction = 20
+        cores  = 2
+        memory = 2
+        
+      }
+      boot_disk {
+        initialize_params {
+          image_id = "fd8jvr9ans916ofp7gdg"
+        }
+      }
+
+      network_interface {
+        subnet_id = yandex_vpc_subnet.subnet-1.id
+        nat       = true
+      }
+      
+      metadata = {
+        user-data = "${file("meta.yaml")}"
+        serial-port-enable = 1
+      }
+    }
+
+    resource "yandex_vpc_network" "network-1" {
+      name = "network1"
+    }
+    resource "yandex_vpc_subnet" "subnet-1" {
+      name           = "subnet1"
+      zone           = "ru-central1-a"
+      network_id     = yandex_vpc_network.network-1.id
+      v4_cidr_blocks = ["192.168.10.0/24"]
+    }
+    output "internal_ip_address_vm_1" {
+      value = yandex_compute_instance.vm-1.network_interface.0.ip_address
+    }
+    output "external_ip_address_vm_1" {
+      value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
+    }
+
+### Конфиги ansible
+### hosts.yaml
+
+    all:
+      hosts: 51.250.79.133
+
+
+### copy-index.yaml
+
+    ---
+    - name: copy index
+      hosts: 51.250.79.133
       become: yes
       become_method: sudo
-```
+      remote_user: user
+      tasks:
+        - name: copy index
+          template:
+            dest: /var/www/html/index.nginx-debian.html
+            src: index.html.j2
+    ...
 
-Провести тестирование. 
+### index.html.j2
 
----
+    <h1>Comp {{ ansible_fqdn }} params:</h1>
+    <h2>CPU: {{ ansible_processor }}</h2>
+    <h2>RAM: {{ ansible_memory_mb['real']['total'] }} MB</h2>
+    <h2>ip address: {{ ansible_all_ipv4_addresses[0] }}</h2>
 
-## Дополнительные задания* (со звёздочкой)
+![](https://github.com/AleksShadrin/netology/tree/main/7-03-TerraformPart2/screenshots/1.png)
+![](https://github.com/AleksShadrin/netology/tree/main/7-03-TerraformPart2/screenshots/2.png)
 
-Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.лнить, если хотите глубже и/или шире разобраться в материале.
-
---- 
-### Задание 2*
-
-**Выполните действия, приложите скриншот скриптов, скриншот выполненного проекта.**
-
-1. Перестроить инфраструктуру и добавить в неё вторую виртуальную машину. 
-2. Установить на вторую виртуальную машину базу данных. 
-3. Выполнить проверку состояния запущенных служб через Ansible.
-
----
-
-Дополнительные материалы: 
-
-1. [Nginx. Руководство для начинающих](https://nginx.org/ru/docs/beginners_guide.html). 
-2. [Руководство по Terraform](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/doc). 
-3. [Ansible User Guide](https://docs.ansible.com/ansible/latest/user_guide/index.html).
-1. [Terraform Documentation](https://www.terraform.io/docs/index.html).

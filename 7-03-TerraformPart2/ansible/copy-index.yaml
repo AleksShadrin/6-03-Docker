@@ -1,0 +1,12 @@
+---
+- name: copy index
+  hosts: 51.250.79.133
+  become: yes
+  become_method: sudo
+  remote_user: user
+  tasks:
+    - name: copy index
+      template:
+        dest: /var/www/html/index.nginx-debian.html
+        src: index.html.j2
+...
