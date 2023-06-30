@@ -23,22 +23,24 @@
     zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
     nano /etc/zabbix/zabbix_server.conf  # добавляем пароль пользователя postgres
     systemctl restart zabbix-server zabbix-agent apache2
-    systemctl enable zabbix-server zabbix-agent apache2 
+    systemctl enable zabbix-server zabbix-agent apache2
 
 ---
 
-### Задание 2 
+### Задание 2
 
 Установите Zabbix Agent на два хоста.
 
 #### Процесс выполнения
+
 1. Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
 2. Установите Zabbix Agent на 2 виртмашины, одной из них может быть ваш Zabbix Server
 3. Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов
 4. Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera
 5. Проверьте что в разделе Latest Data начали появляться данные с добавленных агентов
 
-#### Требования к результаты 
+#### Требования к результаты
+
 1. Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
 
 ![Hosts](https://github.com/AleksShadrin/netology/blob/main/9-02-Zabbix/2.png)
@@ -54,18 +56,19 @@
 
 4. Приложите в файл README.md текст использованных команд в GitHub
 
-    su
-    wget https://repo.zabbix.com/zabbix/6.4/debian/pool/main/z/zabbix-release/zabbix-release_6.4-1+debian11_all.deb
-    dpkg -i zabbix-release_6.4-1+debian11_all.deb
-    apt update
-    apt install zabbix-agent2  zabbix-agent2-plugin-*
-    nano /etc/zabbix/zabbix_agent2.conf # добавляем наш заббикс сервер
-    systemctl restart zabbix-agent2
-    systemctl enable zabbix-agent2
+   su
+   wget https://repo.zabbix.com/zabbix/6.4/debian/pool/main/z/zabbix-release/zabbix-release_6.4-1+debian11_all.deb
+   dpkg -i zabbix-release_6.4-1+debian11_all.deb
+   apt update
+   apt install zabbix-agent2 zabbix-agent2-plugin-\*
+   nano /etc/zabbix/zabbix_agent2.conf # добавляем наш заббикс сервер
+   systemctl restart zabbix-agent2
+   systemctl enable zabbix-agent2
 
+### Задание 3
 
-### Задание 3 
 #### Требования к результаты
+
 Приложите в файл README.md скриншот раздела Latest Data, где видно свободное место на диске C:
 
 ![disk-c-space](https://github.com/AleksShadrin/netology/blob/main/9-02-Zabbix/6.png)
