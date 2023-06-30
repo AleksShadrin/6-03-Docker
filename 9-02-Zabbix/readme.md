@@ -21,7 +21,7 @@
     sudo -u postgres createuser --pwprompt zabbix
     sudo -u postgres createdb -O zabbix zabbix
     zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
-    nano /etc/zabbix/zabbix_server.conf
+    nano /etc/zabbix/zabbix_server.conf  # добавляем пароль пользователя postgres
     systemctl restart zabbix-server zabbix-agent apache2
     systemctl enable zabbix-server zabbix-agent apache2 
 
@@ -59,5 +59,13 @@
     dpkg -i zabbix-release_6.4-1+debian11_all.deb
     apt update
     apt install zabbix-agent2  zabbix-agent2-plugin-*
+    nano /etc/zabbix/zabbix_agent2.conf # добавляем наш заббикс сервер
     systemctl restart zabbix-agent2
     systemctl enable zabbix-agent2
+
+
+### Задание 3 
+#### Требования к результаты
+Приложите в файл README.md скриншот раздела Latest Data, где видно свободное место на диске C:
+
+![disk-c-space](https://github.com/AleksShadrin/netology/blob/main/9-02-Zabbix/6.png)
