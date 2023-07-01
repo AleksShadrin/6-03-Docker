@@ -5,6 +5,8 @@
 ### Задание 1
 Создайте свой шаблон, в котором будут элементы данных, мониторящие загрузку CPU и RAM хоста.
 
+- [ ] Прикрепите в файл README.md скриншот страницы шаблона с названием «Задание 1»
+
 ![netology-task-1](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/1.png)
 
  ---
@@ -12,10 +14,13 @@
 ### Задание 2
 Добавьте в Zabbix два хоста и задайте им имена <фамилия и инициалы-1> и <фамилия и инициалы-2>. Например: ivanovii-1 и ivanovii-2.
 
+- [ ] Результат данного задания сдавайте вместе с заданием 3
  ---
 
 ### Задание 3
 Привяжите созданный шаблон к двум хостам. Также привяжите к обоим хостам шаблон Linux by Zabbix Agent.
+
+- [ ] Прикрепите в файл README.md скриншот страницы хостов, где будут видны привязки шаблонов с названиями «Задание 2-3». Хосты должны иметь зелёный статус подключения
 
 ![netology-task-2-3](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/2.png)
 ![netology-task-2-3-shadrinav-01](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/3.png)
@@ -26,11 +31,15 @@
 ### Задание 4
 Создайте свой кастомный дашборд.
 
+- [ ] Прикрепите в файл README.md скриншот дашборда с названием «Задание 4»
+
 ![netology-task-4](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/6.png)
  ---
 
 ### Задание 5* со звёздочкой
 Создайте карту и расположите на ней два своих хоста.
+
+- [ ] Прикрепите в файл README.md скриншот карты, где видно, что триггер сработал, с названием «Задание 5» 
 
 ![netology-task-5](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/7.png)
 
@@ -55,6 +64,9 @@
 
 - [ ] Прикрепите в файл README.md код скрипта в Git. Приложите в Git скриншот Latest data с результатом работы скрипта на Python, чтобы были видны результаты работы скрипта при отправке в него 1, 2, -ping, а также -simple_print.*
  
+[](https://github.com/AleksShadrin/netology/blob/main/9-03-ZabbixPart2/script.py)
+
+
  ---
 
 ### Задание 8* со звёздочкой
