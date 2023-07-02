@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 10.1 «Keepalived/vrrp» - «Шадирн Алексей»
+# Домашнее задание к занятию 10.1 «Keepalived/vrrp» - «Шадрин Алексей»
 
 ---
 
@@ -9,7 +9,7 @@
 *В качестве решения предоставьте:*   
 *- рабочую конфигурацию обеих нод, оформленную как блок кода в вашем md-файле;*   
 
-# нода1
+### нода1
 ```
 vrrp_instance test {
   state MASTER
@@ -30,7 +30,7 @@ vrrp_instance test {
 }
 ```
 
-# нода2
+### нода2
 ```
 vrrp_instance test {
   state BACKUP
@@ -53,7 +53,7 @@ vrrp_instance test {
 
 *- скриншоты статуса сервисов, на которых видно, что одна нода перешла в MASTER, а вторая в BACKUP state.* 
 
-# нода1
+### нода1
 ![node1](https://github.com/AleksShadrin/netology/blob/main/10-01-Keepalived/1.png)
-# нода2
+### нода2
 ![node2](https://github.com/AleksShadrin/netology/blob/main/10-01-Keepalived/2.png)
