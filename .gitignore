@@ -30,3 +30,4 @@ id_rsa.pub
 12-06/12-06.md
 9-02-Zabbix/Vagrantfile
 9-04-Prometheus/Vagrantfile
+10-01-Keepalived/Vagrantfile
