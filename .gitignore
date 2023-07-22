@@ -32,3 +32,4 @@ id_rsa.pub
 9-04-Prometheus/Vagrantfile
 10-01-Keepalived/Vagrantfile
 10-03-Pacemaker/Vagrantfile
+2-01-vcs/Vagrantfile
