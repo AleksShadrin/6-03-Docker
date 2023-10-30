@@ -29,6 +29,10 @@ $ pip install pika
 
 Для закрепления материала можете попробовать модифицировать скрипты, чтобы поменять название очереди и отправляемое сообщение.
 
+
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/3.png)
+
 ---
 
 ### Задание 3. Подготовка HA кластера
@@ -48,11 +52,17 @@ $ cat /etc/hosts
 
 *В качестве решения домашнего задания приложите скриншоты из веб-интерфейса с информацией о доступных нодах в кластере и включённой политикой.*
 
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/4.png)
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/5.png)
+
 Также приложите вывод команды с двух нод:
 
 ```shell script
 $ rabbitmqctl cluster_status
 ```
+
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/6.png)
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/7.png)
 
 Для закрепления материала снова запустите скрипт producer.py и приложите скриншот выполнения команды на каждой из нод:
 
@@ -60,9 +70,14 @@ $ rabbitmqctl cluster_status
 $ rabbitmqadmin get queue='hello'
 ```
 
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/8.png)
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/9.png)
+
 После чего попробуйте отключить одну из нод, желательно ту, к которой подключались из скрипта, затем поправьте параметры подключения в скрипте consumer.py на вторую ноду и запустите его.
 
 *Приложите скриншот результата работы второго скрипта.*
+
+![](https://github.com/AleksShadrin/netology/blob/main/11-04-RabbitMQ/10.png)
 
 
 ## Дополнительные задания (со звёздочкой*)
