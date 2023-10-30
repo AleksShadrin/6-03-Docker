@@ -2,21 +2,27 @@
 
 ### Задание 1
 1.1. Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/1.png)
 
 1.2. Создайте учётную запись sys_temp. 
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/2.png)
 
 1.3. Выполните запрос на получение списка пользователей в базе данных. (скриншот)
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/3.png)
 
 1.4. Дайте все права для пользователя sys_temp. 
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/4.png)
 
 1.5. Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/5.png)
 
 1.6. Переподключитесь к базе данных от имени sys_temp.
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/6.png)
 
 Для смены типа аутентификации с sha2 используйте запрос: 
@@ -28,6 +34,7 @@ ALTER USER 'sys_temp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass
 1.7. Восстановите дамп в базу данных.
 
 1.8. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
+
 ![](https://github.com/AleksShadrin/netology/blob/main/12-02-DDL-DML/7.png)
 
 *Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.*
