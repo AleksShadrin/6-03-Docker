@@ -38,7 +38,7 @@ services:
     command: --strict.perms=false
     user: root
     volumes:
-      - /projects/test/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /projects/test/filebeat:/usr/share/filebeat/
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
 
