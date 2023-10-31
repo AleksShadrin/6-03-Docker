@@ -21,7 +21,7 @@ GROUP BY s.store_id
 HAVING COUNT(s.store_id) > 300;
 ```
 
-![](https://github.com/AleksShadrin/netology/blob/main/12-03-SQL-Part2/1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/12-04-SQL-Part2/1.png)
 
 ### Задание 2
 
@@ -35,7 +35,7 @@ WHERE length > (
     FROM film);
 ```
 
-![](https://github.com/AleksShadrin/netology/blob/main/12-03-SQL-Part2/2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/12-04-SQL-Part2/2.png)
 
 ### Задание 3
 
@@ -49,4 +49,4 @@ GROUP BY MONTHNAME(payment_date)
 ORDER BY SUM(amount) DESC 
 LIMIT 1
 ```
-![](https://github.com/AleksShadrin/netology/blob/main/12-03-SQL-Part2/3.png)
+![](https://github.com/AleksShadrin/netology/blob/main/12-04-SQL-Part2/3.png)
