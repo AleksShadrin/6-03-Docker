@@ -25,10 +25,15 @@
 ```
 select case when pg_is_in_recovery() then 'REPLICA' else 'MASTER' end;
 ```
+
+![](https://github.com/AleksShadrin/netology/blob/main/12-09-DB-Clouds/3.png)
+
 * Посмотрите количество подключенных реплик:
 ```
 select count(*) from pg_stat_replication;
 ```
+
+![](https://github.com/AleksShadrin/netology/blob/main/12-09-DB-Clouds/4.png)
 
 ### Проверьте работоспособность репликации в кластере
 
@@ -58,23 +63,4 @@ select status from pg_stat_wal_receiver;
 select * from test_table;
 ```
 
-*В качестве результата вашей работы пришлите скриншоты:*
-
-*1) Созданной базы данных;*
-*2) Результата вывода команды на реплике ```select * from test_table;```.*
-
-
-
-### Задание 2*
-
-Создайте кластер, как в задании 1 с помощью Terraform.
-
-
-*В качестве результата вашей работы пришлите скришоты:*
-
-*1) Скриншот созданной базы данных.*
-*2) Код Terraform, создающий базу данных.*
-
----
-
-Задания, помеченные звёздочкой, — дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
+![](https://github.com/AleksShadrin/netology/blob/main/12-09-DB-Clouds/5.png)
