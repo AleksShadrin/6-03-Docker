@@ -23,7 +23,7 @@
 
 ![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/sA_res.png)
 
-- Логи suricata fail2ban пустые
+- Лог suricata пуст - для этой атаки нет правила suricata 
 
 
 **sudo nmap -sT 192.168.33.102**
@@ -36,8 +36,6 @@
 
 ![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/sT_suricata-log.png)
 
-- Лог fail2ban пуст
-
 **sudo nmap -sS 192.168.33.102**
 
 - Результат сканирования:
@@ -48,7 +46,6 @@
 
 ![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/sS_suricata-log.png)
 
-- Лог fail2ban пуст
 
 **sudo nmap -sV 192.168.33.102**
 
@@ -60,7 +57,6 @@
 
 ![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/sV_suricata-log.png)
 
-- Лог fail2ban пуст
 
 По желанию можете поэкспериментировать с опциями: https://nmap.org/man/ru/man-briefoptions.html.
 
@@ -80,6 +76,11 @@
  - создайте два файла: **users.txt** и **pass.txt**;
  - в каждой строчке первого файла должны быть имена пользователей, второго — пароли. В нашем случае это могут быть случайные строки, но ради эксперимента можете добавить имя и пароль существующего пользователя.
 
+Без fail2ban удалось подобрать пароль
+
+![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/hydra.png)
+
+
 Дополнительная информация по **hydra**: https://kali.tools/?p=1847.
 
 2. Включение защиты SSH для Fail2Ban:
@@ -87,6 +88,12 @@
 -  открыть файл /etc/fail2ban/jail.conf,
 -  найти секцию **ssh**,
 -  установить **enabled**  в **true**.
+
+С fail2ban пароль подобрать не получилось - соединение сбрасывается. а ip системы с которой атаковали улетел в бан
+
+![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/fail2ban_1.png)
+
+![](https://github.com/AleksShadrin/netology/blob/main/13-03-Defense-network/fail2ban_2.png)
 
 Дополнительная информация по **Fail2Ban**:https://putty.org.ru/articles/fail2ban-ssh.html.
 
