@@ -26,7 +26,7 @@
 
 ![others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/3.png)
 ---
-![xml-схема others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/others.xml)
+[xml-схема others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/others.xml)
 
 **Что нужно сделать**
 
