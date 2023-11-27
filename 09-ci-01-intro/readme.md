@@ -13,7 +13,8 @@
 7. Done -> Closed, Open.
 
 ![bug](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/4.png)
-![bug](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/bug.xml)
+---
+[xml-схема bug](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/bug.xml)
 
 Остальные задачи должны проходить по упрощённому workflow:
 
@@ -24,7 +25,8 @@
 5. Done -> Closed, Open.
 
 ![others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/3.png)
-![others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/others.xml)
+---
+![xml-схема others](https://github.com/AleksShadrin/netology/blob/main/09-ci-01-intro/others.xml)
 
 **Что нужно сделать**
 
