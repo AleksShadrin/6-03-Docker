@@ -34,3 +34,4 @@ id_rsa.pub
 10-03-Pacemaker/Vagrantfile
 2-01-vcs/Vagrantfile
 11-01/readme.md
+terraform/*
