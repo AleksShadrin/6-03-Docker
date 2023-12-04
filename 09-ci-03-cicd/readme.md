@@ -43,7 +43,7 @@
 3. Проверьте, что все файлы загрузились успешно.
 4. В ответе пришлите файл `maven-metadata.xml` для этого артефекта.
 
-[](https://github.com/AleksShadrin/netology/blob/main/09-ci-03-cicd/maven-metadata.xml)
+[maven-metadata.xml](https://github.com/AleksShadrin/netology/blob/main/09-ci-03-cicd/maven-metadata.xml)
 
 ### Знакомство с Maven
 
@@ -62,4 +62,4 @@
 3. Проверьте директорию `~/.m2/repository/`, найдите ваш артефакт.
 4. В ответе пришлите исправленный файл `pom.xml`.
 
-[](https://github.com/AleksShadrin/netology/blob/main/09-ci-03-cicd/mvn/pom.xml)
+[pom.xml](https://github.com/AleksShadrin/netology/blob/main/09-ci-03-cicd/mvn/pom.xml)
