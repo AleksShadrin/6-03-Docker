@@ -152,13 +152,14 @@ UPDATE clients SET order_id = (SELECT id FROM orders WHERE product = 'Монит
 UPDATE clients SET order_id = (SELECT id FROM orders WHERE product = 'Гитара') WHERE surname = 'Иоганн Себастьян Бах';
 ```
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/4_1.png)
+
 Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод этого запроса.
  
 ```sql
 SELECT * FROM clients WHERE order_id IS NOT NULL;
 ```
 
-![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/4_1.png)
 ![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/4_2.png)
 
 ## Задача 5
