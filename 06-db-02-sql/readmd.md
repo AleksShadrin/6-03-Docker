@@ -175,6 +175,14 @@ SELECT * FROM clients WHERE order_id IS NOT NULL;
 
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. задачу 1).
 
+Остановите контейнер с PostgreSQL, но не удаляйте volumes.
+
+Поднимите новый пустой контейнер с PostgreSQL.
+
+Восстановите БД test_db в новом контейнере.
+
+Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
+
 ```bash
 #бэкапим базу
 pg_dump -U postgres test_db > /var/lib/postgresql/data/pgbackup/test_db.dump
@@ -200,13 +208,3 @@ pg_restore -U postgres -d test_db_restored < /var/lib/postgresql/data/pgbackup/t
 ```
 
 ![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/6_1.png)
-
-
-Остановите контейнер с PostgreSQL, но не удаляйте volumes.
-
-Поднимите новый пустой контейнер с PostgreSQL.
-
-Восстановите БД test_db в новом контейнере.
-
-Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
-
