@@ -48,7 +48,16 @@ services:
 Приведите:
 
 - итоговый список БД после выполнения пунктов выше;
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_1.png)
+
 - описание таблиц (describe);
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_3.png)
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_4.png)
+
+
 - SQL-запрос для выдачи списка пользователей с правами над таблицами test_db;
 
 ```sql
@@ -57,7 +66,12 @@ FROM information_schema.table_privileges
 WHERE table_schema = 'public';
 ```
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_5.png)
+
+
 - список пользователей с правами над таблицами test_db.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/1_6.png)
 
 ## Задача 3
 
@@ -86,6 +100,11 @@ WHERE table_schema = 'public';
 Используя SQL-синтаксис:
 - вычислите количество записей для каждой таблицы.
 
+```sql
+SELECT COUNT(*) FROM orders;
+SELECT COUNT(*) FROM clients;
+```
+
 Приведите в ответе:
 
     - запросы,
@@ -109,6 +128,9 @@ INSERT INTO clients (surname, country, order_id) VALUES
 ```
 
     - результаты их выполнения.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/2_1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/2_2.png)
 
 ## Задача 4
 
@@ -136,12 +158,17 @@ UPDATE clients SET order_id = (SELECT id FROM orders WHERE product = 'Гитар
 SELECT * FROM clients WHERE order_id IS NOT NULL;
 ```
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/4_1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/4_2.png)
+
 ## Задача 5
 
 Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 
 (используя директиву EXPLAIN).
 
 Приведите получившийся результат и объясните, что значат полученные значения.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/5_1.png)
 
 ## Задача 6
 
@@ -154,7 +181,7 @@ pg_dump -U postgres test_db > /var/lib/postgresql/data/pgbackup/test_db.dump
 # отключаемся от контейнера и удаляем его
 sudo docker-compose down
 
-# удаляем базу, т.к. иначе запуск читсго контейнера ничего не даст - старая база будет доступна
+# чистим volume pg_data, т.к. иначе старая база будет доступна
 sudo rm -r pg_data
 
 # поднимаем новый контейнер
@@ -171,9 +198,10 @@ CREATE DATABASE test_db_restored;
 pg_restore -U postgres -d test_db_restored < /var/lib/postgresql/data/pgbackup/test_db.dump
 ```
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-02-sql/files/6_1.png)
+
+
 Остановите контейнер с PostgreSQL, но не удаляйте volumes.
-
-
 
 Поднимите новый пустой контейнер с PostgreSQL.
 
@@ -181,10 +209,3 @@ pg_restore -U postgres -d test_db_restored < /var/lib/postgresql/data/pgbackup/t
 
 Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
 
----
-
-### Как cдавать задание
-
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
