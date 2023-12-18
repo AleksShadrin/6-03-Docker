@@ -36,7 +36,7 @@
 SELECT attname FROM pg_stats WHERE tablename = 'orders' ORDER BY avg_width DESC LIMIT 1;
 ```
 
-![]()
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/2_1.png)
 
 ## Задача 3
 
