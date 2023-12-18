@@ -96,7 +96,7 @@ INSERT into orders_copy (ordr_title, ordr_price) VALUES ('super_mega_black_frida
 
 COMMIT;
 ```
-Список таблиц довыполнения тразакции: 
+Список таблиц до выполнения тразакции: 
 
 ![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/3_3.png)
 
