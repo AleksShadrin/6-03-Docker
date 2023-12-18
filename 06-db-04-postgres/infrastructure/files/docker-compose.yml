@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:13-bullseye
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/pgdata
+      - ./pg_backup:/var/lib/postgresql/data/pgbackup
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: netology
+      PGDATA: /var/lib/postgresql/data/pgdata
