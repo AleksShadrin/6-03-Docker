@@ -47,28 +47,87 @@ SELECT attname FROM pg_stats WHERE tablename = 'orders' ORDER BY avg_width DESC 
 Предложите SQL-транзакцию для проведения данной операции.
 
 ```sql
+BEGIN;
 
+CREATE TABLE orders_1 (CHECK (price > 499)) INHERITS (orders);
+CREATE TABLE orders_2 (CHECK (price <= 499)) INHERITS (orders);
 
-CREATE TABLE orders_1 (
-    CHECK (price > 499)
-) INHERITS (orders);
-CREATE TABLE orders_2 (
-    CHECK (price <= 499)
-) INHERITS (orders);
+SAVEPOINT created_new_tables;
 
+INSERT INTO orders_1 SELECT * FROM orders WHERE price > 499;
+DELETE FROM only orders WHERE price > 499;
+INSERT INTO orders_2 SELECT * FROM orders WHERE price <= 499;
+DELETE FROM only orders WHERE price <= 499;
 
+COMMIT;
 ```
 
+Результат выполнения: 
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/3_1.png)
+
+Изначальная таблица при этом пуста: 
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/3_2.png)
 
 
 Можно ли было изначально исключить "ручное" разбиение при проектировании таблицы orders?
+
+Да, можно было изначально создать партицированную таблицу, вот пример транзакции с созданием такой таблицы и копированием данных из прошлой
+
+```sql
+BEGIN;
+
+CREATE TABLE orders_copy ( 
+    ordr_id serial not null,
+    ordr_title varchar(100) not null,
+    ordr_price smallint not null
+ ) PARTITION BY RANGE (ordr_price);
+
+CREATE TABLE orders_copy_1 PARTITION OF orders_copy FOR VALUES FROM ('0') TO ('498');
+CREATE TABLE orders_copy_2 PARTITION OF orders_copy FOR VALUES FROM ('499') TO ('32767'); --ограничение 32767 возникло из-за выбранного типа данных smallint
+CREATE TABLE orders_copy_default PARTITION OF orders_copy DEFAULT; -- таблица по умолчанию для значений, которые не попали в диапазоны партиций. 
+
+SAVEPOINT created_new_tables;
+
+INSERT into orders_copy (ordr_id, ordr_title, ordr_price) SELECT * from orders; -- копируем в нашу новую таблицу данные из старой
+INSERT into orders_copy (ordr_title, ordr_price) VALUES ('super_mega_black_friday_sale', -9999); -- проверяем куда попадет значение не из диапазона
+
+
+COMMIT;
+```
+Список таблиц довыполнения тразакции: 
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/3_3.png)
+
+Список таблиц после выполнения транзакции (видно, что в самой партицированной таблице нет данных - все данные хранятся в ее партициях. Таблица orders_copy нужна только для доступа к своим партициям)
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-04-postgres/files/3_4.png)
+
+
+
+
 
 ## Задача 4
 
 Используя утилиту `pg_dump` создайте бекап БД `test_database`.
 
+```bash
+pg_dump -U postgres test_database > /var/lib/postgresql/data/pgbackup/test_db.sql
+```
+
+
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
+
+Добавил бы UNIQUE в описание столбца, ытбоы получилось: 
+
+```sql
+CREATE TABLE public.orders (
+    id integer NOT NULL,
+    title character varying(80) UNIQUE NOT NULL,
+    price integer DEFAULT 0
+);
+```
 
 ---
 
@@ -77,3 +136,5 @@ CREATE TABLE orders_2 (
 Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
 
 ---
+
+
