@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   push:
     paths:
-      - "06-db-05-elasticsearch/infrastructure/files/dockerfile/"
+      - "06-db-05-elasticsearch/infrastructure/files/dockerfile/**"
     branches:
       - "main"
 
