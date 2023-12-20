@@ -9,13 +9,15 @@ RUN tar -xzf elasticsearch-7.17.12-linux-x86_64.tar.gz && \
 RUN echo "node.name: netology_test" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
   echo "path.data: /var/lib" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
   echo "network.host: 0.0.0.0" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
-#   echo "cluster.initial_master_nodes: ["netology_test"]" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
   echo "discovery.type: single-node" >> /elasticsearch-7.17.12/config/elasticsearch.yml &&\
-  echo "xpack.security.enabled: false" >> /elasticsearch-7.17.12/config/elasticsearch.yml
+  echo "xpack.security.enabled: false" >> /elasticsearch-7.17.12/config/elasticsearch.yml &&\
+  echo "path.repo: /elasticsearch-7.17.12/snapshots" >> /elasticsearch-7.17.12/config/elasticsearch.yml
 RUN useradd -MU elastic && \
   chown -R elastic:elastic elasticsearch-7.17.12 && \
   mkdir /var/lib/nodes && \
-  chown -R elastic:elastic /var/lib/nodes
+  chown -R elastic:elastic /var/lib/nodes && \
+  mkdir /elasticsearch-7.17.12/snapshots && \
+  chown -R elastic:elastic /elasticsearch-7.17.12/snapshots
 VOLUME ./elk_path:/var/lib
 EXPOSE 9200
 EXPOSE 9300
