@@ -16,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file dockerfile --tag aleks9292/netology:$(date +%s)
+      run: docker build . --file 06-db-05-elasticsearch/infrastructure/files/dockerfile/dockerfile --tag aleks9292/netology:$(date +%s)
