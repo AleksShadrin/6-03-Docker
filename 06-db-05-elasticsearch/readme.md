@@ -156,21 +156,76 @@ curl -X PUT "51.250.77.59:9200/ind-3?pretty" -H 'Content-Type: application/json'
 Используя API, [зарегистрируйте](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-register-repository) 
 эту директорию как `snapshot repository` c именем `netology_backup`.
 
+```bash
+curl -X PUT "51.250.77.59:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: application/json' -d'
+{
+  "type": "fs",
+  "settings": {
+    "location": "/elasticsearch-7.17.12/snapshots"
+  }
+}
+'
+```
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_1.png)
+
+
 **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
 
 Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
+```bash
+curl -X PUT "51.250.77.59:9200/test?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {  
+      "number_of_shards": 1, 
+      "number_of_replicas": 0 
+    }
+  }
+}
+'
+```
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_2.png)
+
 
 [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
 состояния кластера `Elasticsearch`.
 
 **Приведите в ответе** список файлов в директории со `snapshot`.
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_3.png)
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_4.png)
+
 Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_5.png)
 
 [Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние
 кластера `Elasticsearch` из `snapshot`, созданного ранее. 
 
 **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
+
+```bash
+curl -X POST "51.250.77.59:9200/_snapshot/netology_backup/my_snapshot_2023.12.20/_restore?pretty" -H 'Content-Type: application/json' -d'
+{
+  "indices": "test",
+  "rename_pattern": "(.+)",
+  "rename_replacement": "restored-$1"
+}
+'
+
+```
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_6.png)
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_7.png)
+
+*Т.к. мы указали в запросе, что восстанавливаем индекс test, то могли не указывать паттерн переименования - он бы восстановился как test.*
+*Если выполнять запрос на восстаноыление без передачи json - он бы попытался восстановить все индексы, в том числе системные и упал бы в ошибку* 
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/3_8.png)
 
 Подсказки:
 
