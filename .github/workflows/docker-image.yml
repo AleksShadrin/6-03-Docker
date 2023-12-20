@@ -3,8 +3,8 @@ name: Docker Image CI
 on:
   push:
     paths:
-      - "06-db-05-elasticsearch/infrastucture/files/dockerfile/"
-
+      - "/aleksshadrin/netology/06-db-05-elasticsearch/infrastucture/files/dockerfile/@main"
+      
 jobs:
 
   build:
