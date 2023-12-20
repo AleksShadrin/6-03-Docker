@@ -1,23 +1,23 @@
 FROM centos:7
 RUN yum -y install sudo wget perl-Digest-SHA
-RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.16-linux-x86_64.tar.gz && \
-  wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.16-linux-x86_64.tar.gz.sha512 && \
-  shasum -a 512 -c elasticsearch-7.17.16-linux-x86_64.tar.gz.sha512 
-RUN tar -xzf elasticsearch-7.17.16-linux-x86_64.tar.gz && \
-  rm -r elasticsearch-7.17.16-linux-x86_64.tar.gz && rm elasticsearch-7.17.16-linux-x86_64.tar.gz.sha512 && \
-  cd elasticsearch-7.17.16/ 
-RUN echo "node.name: netology_test" >> /elasticsearch-7.17.16/config/elasticsearch.yml && \
-  echo "path.data: /var/lib" >> /elasticsearch-7.17.16/config/elasticsearch.yml && \
-  echo "network.host: 0.0.0.0" >> /elasticsearch-7.17.16/config/elasticsearch.yml && \
-#   echo "cluster.initial_master_nodes: ["netology_test"]" >> /elasticsearch-7.17.16/config/elasticsearch.yml && \
-  echo "discovery.type: single-node" >> /elasticsearch-7.17.16/config/elasticsearch.yml &&\
-  echo "xpack.security.enabled: false" >> /elasticsearch-7.17.16/config/elasticsearch.yml
+RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.12-linux-x86_64.tar.gz && \
+  wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.12-linux-x86_64.tar.gz.sha512 && \
+  shasum -a 512 -c elasticsearch-7.17.12-linux-x86_64.tar.gz.sha512 
+RUN tar -xzf elasticsearch-7.17.12-linux-x86_64.tar.gz && \
+  rm -r elasticsearch-7.17.12-linux-x86_64.tar.gz && rm elasticsearch-7.17.12-linux-x86_64.tar.gz.sha512 && \
+  cd elasticsearch-7.17.12/ 
+RUN echo "node.name: netology_test" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
+  echo "path.data: /var/lib" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
+  echo "network.host: 0.0.0.0" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
+#   echo "cluster.initial_master_nodes: ["netology_test"]" >> /elasticsearch-7.17.12/config/elasticsearch.yml && \
+  echo "discovery.type: single-node" >> /elasticsearch-7.17.12/config/elasticsearch.yml &&\
+  echo "xpack.security.enabled: false" >> /elasticsearch-7.17.12/config/elasticsearch.yml
 RUN useradd -MU elastic && \
-  chown -R elastic:elastic elasticsearch-7.17.16 && \
+  chown -R elastic:elastic elasticsearch-7.17.12 && \
   mkdir /var/lib/nodes && \
   chown -R elastic:elastic /var/lib/nodes
 VOLUME ./elk_path:/var/lib
 EXPOSE 9200
 EXPOSE 9300
 
-CMD ["sudo", "-u", "elastic", "/elasticsearch-7.17.16/bin/elasticsearch"]
+CMD ["sudo", "-u", "elastic", "/elasticsearch-7.17.12/bin/elasticsearch"]
