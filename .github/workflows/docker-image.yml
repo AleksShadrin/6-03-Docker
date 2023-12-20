@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file /06-db-05-elasticsearch/infrastucture/files/dockerfile --tag aleks9292/netology:$(date +%s)
