@@ -26,42 +26,26 @@
           - containerd.io
         update_cache: yes
         state: present
-
-# - name: build and push image
-#   hosts: docker
-#   become: true
-#   vars_files:
-#     - vars/variables.yml
-#   tasks:
-#     - name: copy dockerfile
-#       copy:
-#         src: ./files
-#         dest: .
-#     - name: Log into DockerHub
-#       docker_login:
-#         username: "{{ docker_hub_user }}"
-#         password: "{{ docker_hub_password }}"
-#     - name: docker build
-#       docker_image: 
-#         name: aleks9292/netology:0.2
-#         build:
-#           path: .
-#         source: build
-#     - name: Tag and push to docker hub
-#       docker_image:
-#         name: aleks9292/netology:0.2
-#         repository: aleks9292/netology:0.2
-#         push: yes
-#     - name: Log out of DockerHub
-#       docker_login:
-#         state: absent
+    - name: install module docker
+      pip:
+        executable: pip3
+        name: 
+          - docker==6.1.3
+          - docker-compose
 
 - name: install elasticsearch
   hosts: elk
   become: true
   tasks:
-    - name: docker pull and run
-      docker_image:
-        name: aleks9292/netology:0.3
-        source: pull
+    - name: copy docker-compose-manifest
+      copy:
+        src: ./files/docker-compose.yml
+        dest: .
+    - name: Tear down existing services
+      docker_compose:
+        project_src: .
+        state: absent      
+    - name: install postgres
+      docker_compose:
+        project_src: .
       
