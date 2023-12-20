@@ -48,9 +48,11 @@ CMD ["sudo", "-u", "elastic", "/elasticsearch-7.17.16/bin/elasticsearch"]
 
 - ссылку на образ в репозитории dockerhub,
 
-[репозитарий dockerhub](https://hub.docker.com/repository/docker/aleks9292/netology/general)
+[репозитарий на dockerhub](https://hub.docker.com/repository/docker/aleks9292/netology/general)
 
 - ответ `Elasticsearch` на запрос пути `/` в json-виде.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/1.png)
 
 Подсказки:
 
@@ -78,11 +80,62 @@ CMD ["sudo", "-u", "elastic", "/elasticsearch-7.17.16/bin/elasticsearch"]
 | ind-2 | 1 | 2 |
 | ind-3 | 2 | 4 |
 
+
+```bash
+curl -X PUT "51.250.77.59:9200/ind-1?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {  
+      "number_of_shards": 1, 
+      "number_of_replicas": 0 
+    }
+  }
+}
+'
+
+curl -X PUT "51.250.77.59:9200/ind-2?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 2,  
+      "number_of_replicas": 1
+    }
+  }
+}
+'
+
+curl -X PUT "51.250.77.59:9200/ind-3?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 4,  
+      "number_of_replicas": 2 
+    }
+  }
+}
+'
+```
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_1.png)
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_2.png)
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_3.png)
+
+
 Получите список индексов и их статусов, используя API, и **приведите в ответе** на задание.
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_5.png)
 
 Получите состояние кластера `Elasticsearch`, используя API.
 
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_4.png)
+
 Как вы думаете, почему часть индексов и кластер находятся в состоянии yellow?
+
+*Кластер находится в состояние yellow, т.к. есть индексы, в этом состоянии. Индексы ind-2 и ind-3 находятся в yellow т.к. имеют unassigned реплики, которые негде размещать*
+
+![](https://github.com/AleksShadrin/netology/blob/main/06-db-05-elasticsearch/files/2_6.png)
 
 Удалите все индексы.
 
