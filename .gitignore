@@ -35,3 +35,4 @@ id_rsa.pub
 2-01-vcs/Vagrantfile
 11-01/readme.md
 terraform/*
+.vscode/settings.json
