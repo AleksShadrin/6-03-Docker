@@ -20,5 +20,4 @@ VOLUME ./elk_path:/var/lib
 EXPOSE 9200
 EXPOSE 9300
 
-
 CMD ["sudo", "-u", "elastic", "/elasticsearch-7.17.16/bin/elasticsearch"]
