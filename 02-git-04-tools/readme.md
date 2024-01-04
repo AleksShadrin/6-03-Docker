@@ -27,7 +27,7 @@ commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
 git show aefea
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/1.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/1.png)
 
 2. Ответьте на вопросы.
 
@@ -39,7 +39,7 @@ v0.12.23
 git show 85024d3
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/2.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/2.png)
 
 * Сколько родителей у коммита `b8d720`? Напишите их хеши.
 
@@ -49,7 +49,7 @@ git show 85024d3
 git log --pretty=%P -n 1 b8d720
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/3.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/3.png)
 
 
 * Перечислите хеши и комментарии всех коммитов, которые были сделаны между тегами  v0.12.23 и v0.12.24.
@@ -69,7 +69,7 @@ dd01a35078f040ca984cdd349f18d0b67e486c35 Update CHANGELOG.md
 git log --pretty=format:'%H %s' v0.12.23...v0.12.24
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/4.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/4.png)
 
 * Найдите коммит, в котором была создана функция `func providerSource`, её определение в коде выглядит так: `func providerSource(...)` (вместо троеточия перечислены аргументы).
 
@@ -79,7 +79,7 @@ git log --pretty=format:'%H %s' v0.12.23...v0.12.24
 git log -S "func providerSource" --oneline
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/5.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/5.png)
 
 Результат выдает 2 коммита, в которых изменялась функция, но создана она была именно в 8c928e8358
 
@@ -98,7 +98,7 @@ git log -L :globalPluginDirs:plugins.go # находим изменения со
 
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/6.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/6.png)
 
 
 * Кто автор функции `synchronizedWriters`? 
@@ -110,4 +110,4 @@ git log -S "synchronizedWriters" --pretty=short # ищем кооомиты гд
 git show 5ac311e2a91e381e2f52234668b49ba670aa0fe5 # вывдоим инфо о коммите где она была создана
 ```
 
-[](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/7.png)
+![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/7.png)
