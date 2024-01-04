@@ -96,9 +96,13 @@ git log -S "func providerSource" --oneline
 
 
 78b12205587fe839f10d946ea3fdc06719decb05
+
 52dbf94834cb970b510f2fba853a5b49ad9b1a46
+
 41ab0aef7a0fe030e84018973a64135b11abcd70
+
 66ebff90cdfaa6938f26f908c7ebad8d547fea17
+
 8364383c359a6b738a436d1b7745ccdce178df47
 
 ```bash
@@ -115,8 +119,8 @@ git log -L :globalPluginDirs:plugins.go # находим изменения со
 Martin Atkins <mart@degeneration.co.uk>
 
 ```bash
-git log -S "synchronizedWriters" --pretty=short # ищем кооомиты где была изменена функция
-git show 5ac311e2a91e381e2f52234668b49ba670aa0fe5 # вывдоим инфо о коммите где она была создана
+git log -S "synchronizedWriters" --pretty=short # ищем коммиты где была изменена функция
+git show 5ac311e2a91e381e2f52234668b49ba670aa0fe5 # выводим инфо о коммите где она была создана
 ```
 
 ![](https://github.com/AleksShadrin/netology/blob/main/02-git-04-tools/files/7.png)
