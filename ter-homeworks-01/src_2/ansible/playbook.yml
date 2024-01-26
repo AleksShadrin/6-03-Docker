@@ -25,4 +25,8 @@
           - docker-ce-cli
           - containerd.io
         update_cache: yes
-        state: present        
+        state: present
+    - name: chmod docker.sock
+      file:
+        path: /var/run/docker.sock
+        mode: '0666'
