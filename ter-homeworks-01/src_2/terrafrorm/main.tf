@@ -11,7 +11,8 @@ terraform {
 }
 
 provider "docker" {
-  host = "ssh://aleks@51.250.80.5:22"
+  host     = "ssh://aleks@${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}:22"
+  # ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
 }
 
 provider "yandex" {
@@ -63,10 +64,39 @@ output "external_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
 }
 
-# resource "docker_image" "mysql" {
-#   name = "mysql:8"
-#   # build {
-#   #   context        = "."
-#   #   # remote_context = "ssh://aleks@${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}:22"
-#   # }
-# }
+resource "docker_image" "mysql" {
+  name = "mysql:8"
+  build {
+    context        = "."
+    remote_context = "https://github.com/mysql/mysql-docker.git"
+  }
+}
+
+resource "docker_container" "mysql"{
+  image = docker_image.mysql.image_id
+  name  = "mysql-netology"
+  env = [
+      "MYSQL_ROOT_PASSWORD=${random_password.MYSQL_ROOT_PASSWORD.result}",
+      "MYSQL_DATABASE=wordpress",
+      "MYSQL_USER=wordpress",
+      "MYSQL_PASSWORD=${random_password.MYSQL_PASSWORD.result}",
+      "MYSQL_ROOT_HOST=\"%\""
+  ]
+
+}
+
+resource "random_password" "MYSQL_ROOT_PASSWORD" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
+
+resource "random_password" "MYSQL_PASSWORD" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
