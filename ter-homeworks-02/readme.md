@@ -130,19 +130,27 @@
 
 1. Напишите, какой командой можно отобразить **второй** элемент списка test_list.
 
+```
 local.test_list[1]
+```
 
 2. Найдите длину списка test_list с помощью функции length(<имя переменной>).
 
+```
 length(local.test_list)
+```
 
 3. Напишите, какой командой можно отобразить значение ключа admin из map test_map.
 
+```
 local.test_map.admin
+```
 
 4. Напишите interpolation-выражение, результатом которого будет: "John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
 
+```
 "${local.test_map.admin} is ${keys(local.test_map)[index(keys(local.test_map), "admin")]} for ${keys(local.servers)[index(keys(local.servers), "production")]} server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"
+```
 
 **Примечание**: если не догадаетесь как вычленить слово "admin", погуглите: "terraform get keys of map"
 
