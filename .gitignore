@@ -37,3 +37,6 @@ id_rsa.pub
 terraform/*
 .vscode/settings.json
 vagrant/Vagrantfile
+ter-homeworks-02/demo/demostration1.tf
+ter-homeworks-02/demo/demostration2.tf
+ter-homeworks-02/demo/providers.tf
