@@ -23,6 +23,11 @@
 [varibles.tf](./src/variables.tf)
 
 
+![](./files/2.png)
+![](./files/3.png)
+![](./files/4.png)
+
+
 2. Создайте файл for_each-vm.tf. Опишите в нём создание двух ВМ для баз данных с именами "main" и "replica" **разных** по cpu/ram/disk_volume , используя мета-аргумент **for_each loop**. Используйте для обеих ВМ одну общую переменную типа:
 ```
 variable "each_vm" {
