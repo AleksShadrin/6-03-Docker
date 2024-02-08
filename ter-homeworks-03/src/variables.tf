@@ -58,14 +58,15 @@ variable "vm_web" {
 variable "each_vm" {
   type        = map(object({ vm_name = string, cpu = number, ram = number, disk_volume = number, core_fraction = number, preemptible = bool, nat = bool }))
   description = "vm_db_description"
-  default = { main = {
-    vm_name       = "main"
-    cpu           = 2
-    ram           = 1
-    disk_volume   = 5
-    core_fraction = 5
-    preemptible   = true
-    nat           = true
+  default = {
+    main = {
+      vm_name       = "main"
+      cpu           = 2
+      ram           = 1
+      disk_volume   = 5
+      core_fraction = 5
+      preemptible   = true
+      nat           = true
     },
     replica = {
       vm_name       = "replica"
@@ -77,3 +78,32 @@ variable "each_vm" {
       nat           = true
   } }
 }
+
+variable "disks" {
+  type        = object({ name = string, count = number, type = string, size = number })
+  description = "disks_parameters"
+  default = {
+    name  = "disk"
+    count = 3
+    type  = "network-hdd"
+    size  = 1
+  }
+}
+
+variable "vm_storage" {
+  type        = object({ name = string, resources = map(number), preemptible = bool, nat = bool })
+  description = "vm_storage_description"
+  default = {
+    name  = "storage"
+    resources = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+    }
+    preemptible = true
+    nat         = true
+  }
+}
+
+
+
