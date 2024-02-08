@@ -26,8 +26,9 @@ variable "each_vm" {
 ```  
 При желании внесите в переменную все возможные параметры.
 
-*При выполнении задания я заменил list of object на map of object, т.к. for_each принимает на вход только map и set of strings*
+*При выполнении задания я заменил list of object на map, т.к. for_each принимает на вход только map и set of strings*
 
+![](./files/2.png)
 
 4. ВМ из пункта 2.1 должны создаваться после создания ВМ из пункта 2.2.
 5. Используйте функцию file в local-переменной для считывания ключа ~/.ssh/id_rsa.pub и его последующего использования в блоке metadata, взятому из ДЗ 2.
@@ -41,7 +42,7 @@ variable "each_vm" {
 
 [for_each-vm.tf](./src/for_each-vm.tf)
 
-![](./files/2.png)
+![](./files/3.png)
 
 ------
 
