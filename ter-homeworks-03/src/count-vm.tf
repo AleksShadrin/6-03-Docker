@@ -1,11 +1,9 @@
-data "yandex_compute_image" "ubuntu" {
-  family = var.vm_family
-}
-
 resource "yandex_compute_instance" "web" {
 
+  depends_on = [yandex_compute_instance.db]
+
   count = var.vm_web.count
-  name  = "web-${count.index + 1}"
+  name  = "${var.vm_web.name}-${count.index + 1}"
 
   resources {
     cores         = var.vm_web.resources.cores
@@ -24,10 +22,10 @@ resource "yandex_compute_instance" "web" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.develop.id
-    nat       = var.vm_web.nat
+    subnet_id          = yandex_vpc_subnet.develop.id
+    nat                = var.vm_web.nat
     security_group_ids = [yandex_vpc_security_group.example.id]
   }
 
-
+  metadata = local.metadata
 }
