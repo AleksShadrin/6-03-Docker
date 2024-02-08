@@ -20,6 +20,7 @@ variable "default_zone" {
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
 
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -39,9 +40,10 @@ variable "vm_family" {
 }
 
 variable "vm_web" {
-  type        = object({ count = number, resources = map(number), preemptible = bool, nat = bool })
+  type        = object({ name = string, count = number, resources = map(number), preemptible = bool, nat = bool })
   description = "vm_web_description"
   default = {
+    name  = "web"
     count = 2
     resources = {
       cores         = 2
@@ -50,5 +52,28 @@ variable "vm_web" {
     }
     preemptible = true
     nat         = true
+  }
 }
+
+variable "each_vm" {
+  type        = map(object({ vm_name = string, cpu = number, ram = number, disk_volume = number, core_fraction = number, preemptible = bool, nat = bool }))
+  description = "vm_db_description"
+  default = { main = {
+    vm_name       = "main"
+    cpu           = 2
+    ram           = 1
+    disk_volume   = 5
+    core_fraction = 5
+    preemptible   = true
+    nat           = true
+    },
+    replica = {
+      vm_name       = "replica"
+      cpu           = 4
+      ram           = 2
+      disk_volume   = 10
+      core_fraction = 5
+      preemptible   = true
+      nat           = true
+  } }
 }
