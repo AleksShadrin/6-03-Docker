@@ -94,7 +94,7 @@ variable "vm_storage" {
   type        = object({ name = string, resources = map(number), preemptible = bool, nat = bool })
   description = "vm_storage_description"
   default = {
-    name  = "storage"
+    name = "storage"
     resources = {
       cores         = 2
       memory        = 1
