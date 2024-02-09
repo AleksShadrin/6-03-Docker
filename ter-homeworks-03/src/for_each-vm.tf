@@ -1,7 +1,7 @@
 resource "yandex_compute_instance" "db" {
 
-  for_each = var.each_vm
-  name     = each.value.vm_name
+  for_each = { for vm in var.each_vm : vm.vm_name => vm }
+  name     = each.key
 
   resources {
     cores         = each.value.cpu
