@@ -56,27 +56,27 @@ variable "vm_web" {
 }
 
 variable "each_vm" {
-  type        = map(object({ vm_name = string, cpu = number, ram = number, disk_volume = number, core_fraction = number, preemptible = bool, nat = bool }))
+  type        = list(object({ vm_name = string, cpu = number, ram = number, disk_volume = number, core_fraction = number, preemptible = bool, nat = bool }))
   description = "vm_db_description"
-  default = {
-    main = {
+  default = [
+    {
       vm_name       = "main"
       cpu           = 2
       ram           = 1
       disk_volume   = 5
       core_fraction = 5
       preemptible   = true
-      nat           = true
+      nat           = false
     },
-    replica = {
+    {
       vm_name       = "replica"
       cpu           = 4
       ram           = 2
       disk_volume   = 10
       core_fraction = 5
       preemptible   = true
-      nat           = true
-  } }
+      nat           = false
+  }]
 }
 
 variable "disks" {
@@ -101,7 +101,7 @@ variable "vm_storage" {
       core_fraction = 5
     }
     preemptible = true
-    nat         = true
+    nat         = false
   }
 }
 
