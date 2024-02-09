@@ -41,3 +41,5 @@ ter-homeworks-02/demo/demostration1.tf
 ter-homeworks-02/demo/demostration2.tf
 ter-homeworks-02/demo/providers.tf
 vagrant/*
+ter-homeworks-03/demo/*
+ter-homeworks-03/src/hosts.cfg
