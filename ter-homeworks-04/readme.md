@@ -17,7 +17,7 @@
 
 [variables.tf - сюда добавил переменные которые пойдут в шаблон](./src/variables.tf)
 
-[locals.tf - тут забираем ssh ключ из файла](./src/locals.yml)
+[locals.tf - тут забираем ssh ключ из файла](./src/locals.tf)
 
 
 ![](./files/1.png)
