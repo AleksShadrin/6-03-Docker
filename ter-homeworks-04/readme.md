@@ -52,6 +52,10 @@ module "vpc_dev" {
 
 [код модуля](./src/vpc)
 
+[документация модуля](./src/vpc/readme.md)
+
+![](./files/4.png)
+
 
 
 ### Задание 3
