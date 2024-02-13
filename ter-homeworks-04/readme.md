@@ -65,103 +65,40 @@ module "vpc_dev" {
 4. Импортируйте всё обратно. Проверьте terraform plan. Изменений быть не должно.
 Приложите список выполненных команд и скриншоты процессы.
 
-## Дополнительные задания (со звёздочкой*)
-
-**Настоятельно рекомендуем выполнять все задания со звёздочкой.**   Они помогут глубже разобраться в материале.   
-Задания со звёздочкой дополнительные, не обязательные к выполнению и никак не повлияют на получение вами зачёта по этому домашнему заданию. 
-
-
-### Задание 4*
-
-1. Измените модуль vpc так, чтобы он мог создать подсети во всех зонах доступности, переданных в переменной типа list(object) при вызове модуля.  
-  
-Пример вызова
 ```
-module "vpc_prod" {
-  source       = "./vpc"
-  env_name     = "production"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
-    { zone = "ru-central1-c", cidr = "10.0.3.0/24" },
-  ]
-}
-
-module "vpc_dev" {
-  source       = "./vpc"
-  env_name     = "develop"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-  ]
-}
+terraform state list
 ```
 
-Предоставьте код, план выполнения, результат из консоли YC.
+![](./files/5.png)
 
-### Задание 5*
-
-1. Напишите модуль для создания кластера managed БД Mysql в Yandex Cloud с одним или несколькими(2 по умолчанию) хостами в зависимости от переменной HA=true или HA=false. Используйте ресурс yandex_mdb_mysql_cluster: передайте имя кластера и id сети.
-2. Напишите модуль для создания базы данных и пользователя в уже существующем кластере managed БД Mysql. Используйте ресурсы yandex_mdb_mysql_database и yandex_mdb_mysql_user: передайте имя базы данных, имя пользователя и id кластера при вызове модуля.
-3. Используя оба модуля, создайте кластер example из одного хоста, а затем добавьте в него БД test и пользователя app. Затем измените переменную и превратите сингл хост в кластер из 2-х серверов.
-4. Предоставьте план выполнения и по возможности результат. Сразу же удаляйте созданные ресурсы, так как кластер может стоить очень дорого. Используйте минимальную конфигурацию.
-
-### Задание 6*
-1. Используя готовый yandex cloud terraform module и пример его вызова(examples/simple-bucket): https://github.com/terraform-yc-modules/terraform-yc-s3 .
-Создайте и не удаляйте для себя s3 бакет размером 1 ГБ(это бесплатно), он пригодится вам в ДЗ к 5 лекции.
-
-### Задание 7*
-
-1. Разверните у себя локально vault, используя docker-compose.yml в проекте.
-2. Для входа в web-интерфейс и авторизации terraform в vault используйте токен "education".
-3. Создайте новый секрет по пути http://127.0.0.1:8200/ui/vault/secrets/secret/create
-Path: example  
-secret data key: test 
-secret data value: congrats!  
-4. Считайте этот секрет с помощью terraform и выведите его в output по примеру:
 ```
-provider "vault" {
- address = "http://<IP_ADDRESS>:<PORT_NUMBER>"
- skip_tls_verify = true
- token = "education"
-}
-data "vault_generic_secret" "vault_example"{
- path = "secret/example"
-}
+terraform state rm module.develop-vpc
+terraform state rm module.analytics-vm
+terraform state rm module.marketing-vm
 
-output "vault_example" {
- value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
-} 
-
-Можно обратиться не к словарю, а конкретному ключу:
-terraform console: >nonsensitive(data.vault_generic_secret.vault_example.data.<имя ключа в секрете>)
+terraform state list
 ```
-5. Попробуйте самостоятельно разобраться в документации и записать новый секрет в vault с помощью terraform. 
 
-### Задание 8*
-Попробуйте самостоятельно разобраться в документаци и с помощью terraform remote state разделить root модуль на два отдельных root-модуля: создание VPC , создание ВМ . 
-
-### Правила приёма работы
-
-В своём git-репозитории создайте новую ветку terraform-04, закоммитьте в эту ветку свой финальный код проекта. Ответы на задания и необходимые скриншоты оформите в md-файле в ветке terraform-04.
-
-В качестве результата прикрепите ссылку на ветку terraform-04 в вашем репозитории.
-
-**Важно.** Удалите все созданные ресурсы.
-
-### Критерии оценки
-
-Зачёт ставится, если:
-
-* выполнены все задания,
-* ответы даны в развёрнутой форме,
-* приложены соответствующие скриншоты и файлы проекта,
-* в выполненных заданиях нет противоречий и нарушения логики.
-
-На доработку работу отправят, если:
-
-* задание выполнено частично или не выполнено вообще,
-* в логике выполнения заданий есть противоречия и существенные недостатки. 
+![](./files/6.png)
 
 
+```
+terraform import "module.develop-vpc.yandex_vpc_network.network" enpahpas9ggq36r9f7a0
+terraform import "module.develop-vpc.yandex_vpc_subnet.subnet" e9b637u8n72341n0ekev
+terraform import "module.marketing-vm.yandex_compute_instance.vm[0]" fhmat0klrc0scc3g9tiq
+terraform import "module.analytics-vm.yandex_compute_instance.vm[0]" fhmnsjehcp153dafhgqp
+```
 
+![](./files/7.png)
 
+```
+terrafrom state list
+```
+
+![](./files/8.png)
+
+```
+terraform plan
+```
+
+![](./files/9.png)
