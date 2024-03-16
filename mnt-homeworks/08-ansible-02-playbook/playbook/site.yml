@@ -1,0 +1,78 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+  tasks:
+    - block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+      notify: Start clickhouse service
+    - name: Flush handlers
+      meta: flush_handlers
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc !=82
+      changed_when: create_db.rc == 0
+
+- name: Install vector
+  hosts: vector
+  handlers:
+    - name: restart vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+  tasks:
+    - name: get vector distrib
+      ansible.builtin.get_url:
+        url: "https://packages.timber.io/vector/0.36.1/vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+        dest: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+    - name: unarchive vector
+      ansible.builtin.unarchive:
+        src: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+        dest: "./vector"
+    # - name: 
+    #   ansible.builtin.lineinfile:
+    #     backup: true
+    #     line: "export PATH=\"$(pwd)/vector/bin:\$PATH\""
+    #     path: "./.profile"
+    - name: copy service to systemd
+      ansible.builtin.file:
+        src: "./vector/etc/systemd/vector.service"
+        dest: "/etc/systemd/system/"
+    - name: copy bin to /usr/bin
+      ansible.builtin.file:
+        src: "./vector/bin/vector"
+        dest: "/usr/bin"
+    - name: mkdir /etc/vector
+      ansible.builtin.file:
+        path: "/etc/vector"
+        state: directory
+    - name:
+      ansible.builtin.template:
+        src: "./templates/vector.yml.j2"
+        dest:  "/etc/vector.yaml"
+      notify: restart vector service
+    
+      
