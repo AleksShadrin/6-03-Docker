@@ -8,27 +8,31 @@
         name: clickhouse-server
         state: restarted
   tasks:
-    - block:
+    - name: Get clickhouse distrib
+      block:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
             dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: "0644"
           with_items: "{{ clickhouse_packages }}"
       rescue:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: "0644"
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
         name:
-          - clickhouse-common-static-{{ clickhouse_version }}.rpm
-          - clickhouse-client-{{ clickhouse_version }}.rpm
-          - clickhouse-server-{{ clickhouse_version }}.rpm
+          - "clickhouse-common-static-{{ clickhouse_version }}.rpm"
+          - "clickhouse-client-{{ clickhouse_version }}.rpm"
+          - "clickhouse-server-{{ clickhouse_version }}.rpm"
+        disable_gpg_check: true
       notify: Start clickhouse service
     - name: Flush handlers
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
       register: create_db
@@ -38,41 +42,56 @@
 - name: Install vector
   hosts: vector
   handlers:
-    - name: restart vector service
+    - name: Restart vector service
       become: true
       ansible.builtin.service:
         name: vector
         state: restarted
   tasks:
-    - name: get vector distrib
+    - name: Create group
+      ansible.builtin.group:
+        name: vector
+    - name: Create user
+      ansible.builtin.user:
+        name: vector
+        group: vector
+    - name: Get vector distrib
       ansible.builtin.get_url:
         url: "https://packages.timber.io/vector/0.36.1/vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
         dest: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
-    - name: unarchive vector
+        mode: "0644"
+    - name: Unarchive vector
       ansible.builtin.unarchive:
         src: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
-        dest: "./vector"
-    # - name: 
-    #   ansible.builtin.lineinfile:
-    #     backup: true
-    #     line: "export PATH=\"$(pwd)/vector/bin:\$PATH\""
-    #     path: "./.profile"
-    - name: copy service to systemd
-      ansible.builtin.file:
-        src: "./vector/etc/systemd/vector.service"
+        dest: "."
+        remote_src: true
+    - name: Copy service to systemd
+      ansible.builtin.copy:
+        src: "./vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
         dest: "/etc/systemd/system/"
-    - name: copy bin to /usr/bin
-      ansible.builtin.file:
-        src: "./vector/bin/vector"
+        remote_src: true
+    - name: Copy bin to /usr/bin
+      ansible.builtin.copy:
+        src: "./vector-x86_64-unknown-linux-musl/bin/vector"
         dest: "/usr/bin"
-    - name: mkdir /etc/vector
+        owner: vector
+        group: vector
+        mode: "0744"
+        remote_src: true
+    - name: Create /var/lib/vector
+      ansible.builtin.file:
+        path: "/var/lib/vector"
+        state: directory
+        owner: vector
+        group: vector
+    - name: Create /etc/vector
       ansible.builtin.file:
         path: "/etc/vector"
         state: directory
-    - name:
+    - name: Copy vector config
       ansible.builtin.template:
-        src: "./templates/vector.yml.j2"
-        dest:  "/etc/vector.yaml"
-      notify: restart vector service
-    
-      
+        src: "./templates/vector.yaml.j2"
+        dest: "/etc/vector/vector.yaml"
+      notify: Restart vector service
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
