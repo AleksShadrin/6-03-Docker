@@ -31,19 +31,19 @@ ansible-playbook -i inventory/prod.yaml site.yml
 
 ### ansible-lint 
 
-![](./files/1.png)
+![](../files/1.png)
 
 ### С Флагом --check
 
 *На скриншоте результат запуска плейбука с флагом --check и параметром check-mode: false в таске Get clickhouse distrib. Запуск завершился ошибкой, т.к. таска Install clickhouse packages была запущена в чек мод, пакеты не были установлены и запускать было нечего.*
 
-![](./files/2.png)
+![](../files/2.png)
 
 ### С флагом --diff и изменениями
 
-![](./files/3.png)
+![](../files/3.png)
 
 
 ### С флагом --diff без изменений
 
-![](./files/4.png)
+![](../files/4.png)
