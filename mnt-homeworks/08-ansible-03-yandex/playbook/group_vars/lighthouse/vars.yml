@@ -1,0 +1,3 @@
+---
+lighthouse_repo: https://github.com/VKCOM/lighthouse.git
+lighthouse_dest: /usr/share/lighthouse/
