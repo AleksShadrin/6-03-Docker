@@ -67,12 +67,12 @@ ansible-playbook -i inventory/prod.yaml site.yml
 
 ### проверка clickhouse
 
-![](../files/4.png)
+![](../files/5.png)
 
 ### проверка vector
 
-![](../files/4.png)
+![](../files/6.png)
 
 ### проверка lighthouse
 
-![](../files/4.png)
+![](../files/7.png)
