@@ -1,0 +1,163 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+  tasks:
+    - name: Get clickhouse distrib
+      block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: "0644"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: "0644"
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.yum:
+        name:
+          - "clickhouse-common-static-{{ clickhouse_version }}.rpm"
+          - "clickhouse-client-{{ clickhouse_version }}.rpm"
+          - "clickhouse-server-{{ clickhouse_version }}.rpm"
+        disable_gpg_check: true
+      notify: Start clickhouse service
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc !=82
+      changed_when: create_db.rc == 0
+- name: Install vector
+  hosts: vector
+  handlers:
+    - name: Restart vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+  tasks:
+    - name: Create group
+      become: true
+      ansible.builtin.group:
+        name: vector
+    - name: Create user
+      become: true
+      ansible.builtin.user:
+        name: vector
+        group: vector
+    - name: Get vector distrib
+      ansible.builtin.get_url:
+        url: "https://packages.timber.io/vector/0.36.1/vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+        dest: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+        mode: "0644"
+    - name: Unarchive vector
+      ansible.builtin.unarchive:
+        src: "./vector-0.36.1-x86_64-unknown-linux-musl.tar.gz"
+        dest: "."
+        remote_src: true
+    - name: Copy service to systemd
+      become: true
+      ansible.builtin.copy:
+        src: "./vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
+        dest: "/etc/systemd/system/"
+        remote_src: true
+        mode: "0644"
+    - name: Copy bin to /usr/bin
+      become: true
+      ansible.builtin.copy:
+        src: "./vector-x86_64-unknown-linux-musl/bin/vector"
+        dest: "/usr/bin"
+        owner: vector
+        group: vector
+        mode: "0744"
+        remote_src: true
+    - name: Create /var/lib/vector
+      become: true
+      ansible.builtin.file:
+        path: "/var/lib/vector"
+        state: directory
+        owner: vector
+        group: vector
+        mode: "0644"
+    - name: Create /etc/vector
+      become: true
+      ansible.builtin.file:
+        path: "/etc/vector"
+        state: directory
+        mode: "0644"
+    - name: Copy vector config
+      become: true
+      ansible.builtin.template:
+        src: "./templates/vector.yaml.j2"
+        dest: "/etc/vector/vector.yaml"
+        mode: "0644"
+      notify: Restart vector service
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+- name: Install nginx
+  hosts: lighthouse
+  handlers:
+    - name: Reload nginx
+      become: true
+      ansible.builtin.systemd:
+        name: nginx
+        state: reloaded
+  tasks:
+    - name: Install prerequisites
+      ansible.builtin.yum:
+        name: yum-utils
+        state: present
+    - name: Copy nginx.repo
+      become: true
+      ansible.builtin.template:
+        src: "./templates/nginx.repo.j2"
+        dest: "/etc/yum.repos.d/nginx.repo"
+        mode: "0644"
+    - name: Install nginx
+      become: true
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+    - name: Copy nginx.conf
+      become: true
+      ansible.builtin.template:
+        src: "./templates/nginx.conf.j2"
+        dest: "/etc/nginx/nginx.conf"
+        mode: "0644"
+      notify: Reload nginx
+- name: Install lighthouse
+  become: true
+  hosts: lighthouse
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: reloaded
+  pre_tasks:
+    - name: Install git
+      ansible.builtin.yum:
+        name: git
+        state: present
+  tasks:
+    - name: Clone lighthouse
+      ansible.builtin.git:
+        repo: "{{ lighthouse_repo }}"
+        dest: "{{ lighthouse_dest }}"
+        version: master
+    - name: Copy lighthouse.conf
+      ansible.builtin.template:
+        src: "./templates/lighthouse.conf.j2"
+        dest: "/etc/nginx/conf.d/default.conf"
+        mode: "0644"
+      notify: Reload nginx
