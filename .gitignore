@@ -46,6 +46,7 @@ ter-homeworks-03/src/hosts.cfg
 ter-homeworks-03/src/hosts.cfg
 *.tfstate
 *.backup
+*.lock.hcl
 mnt-homeworks/08-ansible-03-yandex/terraform/personal.auto.tfvars
 /mnt-homeworks/08-ansible-03-yandex/terraform/.terraform
 mnt-homeworks/08-ansible-03-yandex/terraform/.terraform.lock.hcl
